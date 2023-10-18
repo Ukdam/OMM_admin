@@ -1,7 +1,31 @@
 import "../css/Sidebar.css";
 import logo from "../ommlogo.svg";
+import React, { useContext, useEffect } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 export default function Sidebar() {
+  const { setUserInfo, userInfo } = useContext(UserContext);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/profile", {
+      credentials: "include",
+    }).then((res) => {
+      res.json().then((userInfo) => {
+        setUserInfo(userInfo);
+      });
+    });
+  }, []);
+
+  function logout() {
+    fetch("http://localhost:4000/logout", {
+      credentials: "include",
+      method: "POST",
+    });
+    setUserInfo(null);
+  }
+
+  const username = userInfo?.username;
+
   return (
     <>
       <div className="sidebar_container font_01">
@@ -40,8 +64,10 @@ export default function Sidebar() {
         </div>
         <div className="sidebar_remaincontainer">
           <div>
-            <p>이름</p>
-            <button className="font_01">로그아웃</button>
+            <p>{username}</p>
+            <button className="font_01" onClick={logout}>
+              로그아웃
+            </button>
           </div>
         </div>
       </div>

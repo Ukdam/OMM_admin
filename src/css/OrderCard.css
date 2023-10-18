@@ -1,12 +1,13 @@
 .orderc_container {
-  width: 630px;
-  height: 340px;
+  width: 530px;
+  height: 350px;
   background-color: white;
   border-radius: 20px;
   margin-left: 60px;
+  margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
-  box-shadow: 2px 2px 2px 2px var(--gray6);
+  box-shadow: 1px 1px 1px 1px #a7a7a7;
 }
 .orderc_container > * {
   width: 100%;
@@ -91,15 +92,18 @@
 }
 
 .__order_okbtn {
-  width: 200px;
-  height: 50px;
-  color: white;
   background-color: rgb(101, 131, 214);
-  border: none;
-  border-radius: 15px;
-  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.__order_okbtn:hover {
+  background-color: rgb(90, 117, 190);
 }
 
 .__order_nobtn {
   background-color: rgb(216, 78, 78);
+  cursor: pointer;
+}
+.__order_nobtn:hover {
+  background-color: rgb(192, 69, 69);
 }
