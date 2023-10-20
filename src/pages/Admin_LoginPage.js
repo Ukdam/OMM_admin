@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import "../css/LoginPage.css";
+import "../css/Admin_LoginPage.css";
 import { Navigate } from "react-router-dom";
 import logo from "../ommlogo.svg";
-import { UserContext } from "../contexts/UserContext";
+import { UserContext } from "../contexts/Admin_UserContext";
 
-export default function LoginPage() {
+export default function Admin_LoginPage() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
@@ -26,7 +26,7 @@ export default function LoginPage() {
   async function login(e) {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:4000/login/admin", {
+    const response = await fetch("http://localhost:4000/admin/login", {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: { "Content-Type": "application/json" },
@@ -44,13 +44,13 @@ export default function LoginPage() {
   }
 
   if (redirect) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/admin/"} />;
   }
 
   return (
     <>
       {adminname ? (
-        <Navigate to={"/"} />
+        <Navigate to={"/admin/"} />
       ) : (
         <main className="main_outlet font_01 loginmain">
           <form className="login" onSubmit={login}>

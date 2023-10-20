@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import { format } from "date-fns";
-import "../css/OrderCard.css";
-import { MenuContext } from "../contexts/MenuContext";
+import "../css/Admin_OrderCard.css";
+import { MenuContext } from "../contexts/Admin_MenuContext";
 
-export default function OrderCard({
+export default function Admin_OrderCard({
   _id,
   pd_quantity,
   pd_price,

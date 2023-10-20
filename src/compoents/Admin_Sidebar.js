@@ -1,13 +1,13 @@
-import "../css/Sidebar.css";
+import "../css/Admin_Sidebar.css";
 import logo from "../ommlogo.svg";
 import React, { useContext, useEffect } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { UserContext } from "../contexts/Admin_UserContext";
 
-export default function Sidebar() {
+export default function Admin_Sidebar() {
   const { setUserInfo, userInfo } = useContext(UserContext);
 
   useEffect(() => {
-    fetch("http://localhost:4000/profile", {
+    fetch("http://localhost:4000/admin/profile", {
       credentials: "include",
     }).then((res) => {
       res.json().then((userInfo) => {
@@ -17,7 +17,7 @@ export default function Sidebar() {
   }, []);
 
   function logout() {
-    fetch("http://localhost:4000/logout", {
+    fetch("http://localhost:4000/admin/logout", {
       credentials: "include",
       method: "POST",
     });
