@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "../css/OrderCard.css";
+import { MenuContext } from "../contexts/MenuContext";
 
 export default function OrderCard() {
   const nowState = ["미 접수", "조리 중", "배달 중", "배달 완료"];
@@ -14,6 +15,12 @@ export default function OrderCard() {
     }
   };
 
+  const { setMenuInfo, menuInfo } = useContext(MenuContext);
+
+  const pd_quantity = menuInfo?.pd_quantity;
+  const pd_price = menuInfo?.pd_price;
+  const pd_context = menuInfo?.pd_context;
+
   return (
     <>
       <div className="orderc_container">
@@ -27,10 +34,10 @@ export default function OrderCard() {
           <div className="__order_context">재료</div>
           <div className="__order_remain">
             <p>날짜</p>
-            <p>수량</p>
-            <p>가격</p>
+            <p>{pd_quantity} 개</p>
+            <p>{pd_price} 원</p>
           </div>
-          <p className="__order_request">요청사항</p>
+          <p className="__order_request">{pd_context}</p>
         </div>
         <div className="order_btn_container">
           <button className="__order_okbtn font_01" onClick={changeNowState}>
