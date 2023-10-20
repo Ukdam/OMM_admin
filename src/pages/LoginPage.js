@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "../css/LoginPage.css";
 import { Navigate } from "react-router-dom";
 import logo from "../ommlogo.svg";

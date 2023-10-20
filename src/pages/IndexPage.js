@@ -1,6 +1,6 @@
 import OrderCard from "../compoents/OrderCard";
 import "../css/IndexPage.css";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { Navigate } from "react-router-dom";
 import { MenuContext } from "../contexts/MenuContext";
@@ -19,21 +19,33 @@ export default function IndexPage() {
     });
   }, []);
 
-  useEffect(() => {
-    fetch("http://localhost:4000/orderlsit", {
-      credentials: "include",
-    }).then((res) => {
-      res.json().then((menuInfo) => {
-        setMenuInfo(menuInfo);
-      });
-    });
-  }, []);
-
   const username = userInfo?.username;
+
+  // useEffect(() => {
+  //   fetch("http://localhost:4000/orderlsit", {
+  //     credentials: "include",
+  //   }).then((res) => {
+  //     res.json().then((menuInfo) => {
+  //       setMenuInfo(menuInfo);
+  //     });
+  //   });
+  // }, []);
 
   // const pd_quantity = menuInfo?.pd_quantity;
   // const pd_price = menuInfo?.pd_price;
   // const pd_context = menuInfo?.pd_context;
+
+  const [orderlists, setOrderlists] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/orderlist", {
+      credentials: "include",
+    }).then((res) => {
+      res.json().then((orderlists) => {
+        setOrderlists(orderlists);
+      });
+    });
+  }, []);
 
   return (
     <>
@@ -41,11 +53,10 @@ export default function IndexPage() {
         <main className="main_outlet font_01">
           <div className="index_titlecontainer">TEST</div>
           <div className="index_maincontainer">
-            {menuInfo &&
-              menuInfo.map((index) => {
-                return <OrderCard />;
-              })}
-            {/* <OrderCard /> */}
+            {orderlists.length > 0 &&
+              orderlists.map((orderlist) => (
+                <OrderCard {...orderlist} key={orderlist._id} />
+              ))}
           </div>
         </main>
       ) : (
