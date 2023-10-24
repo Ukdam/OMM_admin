@@ -1,0 +1,55 @@
+.roc_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.__roc_ordernum {
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  text-align: left;
+  padding-left: 20px;
+  font-size: 0.8rem;
+}
+
+.roc_img {
+  width: 120px;
+  height: 100px;
+  line-height: 100px;
+  background-color: darkgray;
+  border-radius: 20px;
+}
+
+.roc_context {
+  width: 240px;
+  height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow-y: scroll;
+}
+
+.roc_context > p {
+  width: 45%;
+  height: 20px;
+  line-height: 20px;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--gray3);
+}
+
+/* 스크롤 바 없애기 */
+/* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
+.roc_context::-webkit-scrollbar,
+.roc_context::-webkit-scrollbar {
+  display: none;
+}
+.roc_context,
+.__order_adress {
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+}
+/* ---------------------*/
