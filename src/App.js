@@ -4,6 +4,9 @@ import { Route, Routes } from "react-router-dom";
 import Admin_Layout from "./compoents/Admin_Layout";
 import Admin_IndexPage from "./pages/Admin_IndexPage";
 import Admin_LoginPage from "./pages/Admin_LoginPage";
+import Admin_OrderPage from "./pages/Admin_OrderPage";
+import Admin_UserPage from "./pages/Admin_UserPage";
+import Admin_ReviewPage from "./pages/Admin_ReviewPage";
 import { UserContextProvider } from "./contexts/Admin_UserContext";
 import { MenuContextProvider } from "./contexts/Admin_MenuContext";
 
@@ -16,6 +19,9 @@ function App() {
             <Route path="/" element={<Admin_Layout />}>
               <Route index element={<Admin_IndexPage />} />
               <Route path="login" element={<Admin_LoginPage />} />
+              <Route path="order" element={<Admin_OrderPage />} />
+              <Route path="user" element={<Admin_UserPage />} />
+              <Route path="review" element={<Admin_ReviewPage />} />
             </Route>
           </Routes>
         </MenuContextProvider>
