@@ -30,16 +30,24 @@
   justify-content: space-between;
   align-items: center;
 }
-/* 현재 페이지 */
-.sidebar_container .maincontainer:nth-of-type(2) {
-  background-color: var(--pink);
+
+.sidebar_container > * > * {
+  background-color: inherit;
+  border: 0px;
+  width: 100%;
+  height: 100%;
+  font-size: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
 }
 
-.sidebar_container .maincontainer > p:first-child {
+.sidebar_container .maincontainer > * > p:first-child {
   width: 40%;
   text-align: center;
 }
-.sidebar_container .maincontainer > p:last-child {
+.sidebar_container .maincontainer > * > p:last-child {
   width: 60%;
   text-align: left;
 }
@@ -76,4 +84,13 @@
 
 .sidebar_container .sidebar_remaincontainer button:hover {
   background-color: #414141;
+}
+
+/* 현재 페이지 */
+/* .sidebar_container .maincontainer:nth-of-type(2) {
+  background-color: var(--pink);
+} */
+
+.sidebar_container a.active {
+  background-color: var(--pink);
 }

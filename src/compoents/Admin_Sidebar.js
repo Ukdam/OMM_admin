@@ -1,7 +1,8 @@
 import "../css/Admin_Sidebar.css";
 import logo from "../ommlogo.svg";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/Admin_UserContext";
+import { Link, Navigate, useLocation } from "react-router-dom";
 
 export default function Admin_Sidebar() {
   // const { setUserInfo, userInfo } = useContext(UserContext);
@@ -26,6 +27,8 @@ export default function Admin_Sidebar() {
 
   // const username = userInfo?.username;
 
+  const location = useLocation();
+
   return (
     <>
       <div className="sidebar_container font_01">
@@ -33,34 +36,57 @@ export default function Admin_Sidebar() {
           <img src={logo} alt="로고" className="ommlogo" />
         </div>
         <div className="sidebar_dashboardcontainer maincontainer">
-          <p>
-            <i class="fa-solid fa-table-columns"></i>
-          </p>
-          <p>대시보드</p>
+          <Link to={"/"} className={location.pathname === "/" ? "active" : ""}>
+            <p>
+              <i class="fa-solid fa-table-columns"></i>
+            </p>
+            <p>대시보드</p>
+          </Link>
         </div>
         <div className="sidebar_ordercontainer maincontainer">
-          <p>
-            <i class="fa-solid fa-cart-shopping"></i>
-          </p>
-          <p>주문</p>
+          <Link
+            to={"/order"}
+            className={location.pathname === "/order" ? "active" : ""}
+          >
+            <p>
+              <i class="fa-solid fa-cart-shopping"></i>
+            </p>
+            <p>주문</p>
+          </Link>
         </div>
         <div className="sidebar_productcontainer maincontainer">
-          <p>
-            <i class="fa-solid fa-boxes-stacked"></i>
-          </p>
-          <p>상품</p>
+          <Link
+            to={"/product"}
+            className={location.pathname === "/product" ? "active" : ""}
+          >
+            <p>
+              <i class="fa-solid fa-boxes-stacked"></i>
+            </p>
+            <p>상품</p>
+          </Link>
         </div>
+
         <div className="sidebar_usercontainer maincontainer">
-          <p>
-            <i class="fa-solid fa-user"></i>
-          </p>
-          <p>회원</p>
+          <Link
+            to={"/user"}
+            className={location.pathname === "/user" ? "active" : ""}
+          >
+            <p>
+              <i class="fa-solid fa-user"></i>
+            </p>
+            <p>회원</p>
+          </Link>
         </div>
         <div className="sidebar_noticecontainer maincontainer">
-          <p>
-            <i class="fa-solid fa-clipboard-list"></i>
-          </p>
-          <p>게시글</p>
+          <Link
+            to={"/review"}
+            className={location.pathname === "/review" ? "active" : ""}
+          >
+            <p>
+              <i class="fa-solid fa-clipboard-list"></i>
+            </p>
+            <p>후기</p>
+          </Link>
         </div>
         <div className="sidebar_remaincontainer">
           <div>
