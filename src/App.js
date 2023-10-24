@@ -9,6 +9,7 @@ import Admin_UserPage from "./pages/Admin_UserPage";
 import Admin_ReviewPage from "./pages/Admin_ReviewPage";
 import { UserContextProvider } from "./contexts/Admin_UserContext";
 import { MenuContextProvider } from "./contexts/Admin_MenuContext";
+import Admin_ProductPage from "./pages/Admin_ProductPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="order" element={<Admin_OrderPage />} />
               <Route path="user" element={<Admin_UserPage />} />
               <Route path="review" element={<Admin_ReviewPage />} />
+              <Route path="product" element={<Admin_ProductPage />} />
             </Route>
           </Routes>
         </MenuContextProvider>

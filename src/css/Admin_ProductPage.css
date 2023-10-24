@@ -1,0 +1,51 @@
+.Product_Page {
+    font-size: 60px;
+    text-align: left;
+    margin: 43px;
+}
+
+.P_Btn_Container {
+    display: flex;
+    background-color: #d4fcff;
+}
+
+.P_Btn_Css {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 35px;
+    border: 0;
+    background-color: transparent;
+    margin: 30px 40px 30px 40px;
+    cursor: pointer
+}
+
+.Inner_Btn_box {
+    margin-top: 5px;
+    font-size: 15px;
+    text-align: center;
+    flex-grow: 1;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    padding: 7px 15px 7px 15px;
+    margin: 0px 10px 0px 10px;
+}
+
+.P_Btn_Css:nth-child(1) {
+    margin-left: 100px;
+}
+
+.New_Product {
+    margin: 15px;
+    background-color: #485BFF;
+    border: 0;
+    color: white;
+    border-radius: 15px;
+    font-size: 20px;
+    margin-left: 550px;
+    padding: 15px 40px 15px 40px;
+    cursor: pointer
+}
