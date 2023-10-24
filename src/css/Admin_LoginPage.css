@@ -30,6 +30,9 @@
   margin-top: 80px;
   margin-bottom: 80px;
 }
+.login_imgcontainer > img {
+  margin: auto;
+}
 
 .login_inputcontainer {
   height: 215px;

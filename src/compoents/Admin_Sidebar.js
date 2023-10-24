@@ -4,27 +4,27 @@ import React, { useContext, useEffect } from "react";
 import { UserContext } from "../contexts/Admin_UserContext";
 
 export default function Admin_Sidebar() {
-  const { setUserInfo, userInfo } = useContext(UserContext);
+  // const { setUserInfo, userInfo } = useContext(UserContext);
 
-  useEffect(() => {
-    fetch("http://localhost:4000/admin/profile", {
-      credentials: "include",
-    }).then((res) => {
-      res.json().then((userInfo) => {
-        setUserInfo(userInfo);
-      });
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:4000/admin/profile", {
+  //     credentials: "include",
+  //   }).then((res) => {
+  //     res.json().then((userInfo) => {
+  //       setUserInfo(userInfo);
+  //     });
+  //   });
+  // }, []);
 
-  function logout() {
-    fetch("http://localhost:4000/admin/logout", {
-      credentials: "include",
-      method: "POST",
-    });
-    setUserInfo(null);
-  }
+  // function logout() {
+  //   fetch("http://localhost:4000/admin/logout", {
+  //     credentials: "include",
+  //     method: "POST",
+  //   });
+  //   setUserInfo(null);
+  // }
 
-  const username = userInfo?.username;
+  // const username = userInfo?.username;
 
   return (
     <>
@@ -64,10 +64,9 @@ export default function Admin_Sidebar() {
         </div>
         <div className="sidebar_remaincontainer">
           <div>
-            <p>{username}</p>
-            <button className="font_01" onClick={logout}>
-              로그아웃
-            </button>
+            {/* 로그인시 이름 */}
+            <p>이름</p>
+            <button className="font_01">로그아웃</button>
           </div>
         </div>
       </div>

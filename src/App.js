@@ -12,14 +12,8 @@ function App() {
     <>
       <UserContextProvider>
         <MenuContextProvider>
-          {/* <Routes>
-            <Route path="/user" element={<Layout />}>
-              <Route index element={<IndexPage />} />
-              <Route path="login" element={<LoginPage />} />
-            </Route>
-          </Routes> */}
           <Routes>
-            <Route path="/admin" element={<Admin_Layout />}>
+            <Route path="/" element={<Admin_Layout />}>
               <Route index element={<Admin_IndexPage />} />
               <Route path="login" element={<Admin_LoginPage />} />
             </Route>
