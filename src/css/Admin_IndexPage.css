@@ -258,8 +258,8 @@
 .__nop_chartbox {
   width: 650px;
   height: 340px;
-  background-color: #b8b8b8;
-  border: 3px solid var(--bluedark);
+  /* background-color: #b8b8b8; */
+  border: 2px solid var(--bluedark);
   line-height: 340px;
 }
 
@@ -321,6 +321,7 @@
   color: #b8b8b8;
   border-radius: 20px;
   margin-bottom: 5px;
+  object-fit: cover;
 }
 
 .__dash_bestproductbox > div > p {

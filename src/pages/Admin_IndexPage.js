@@ -5,13 +5,14 @@ import { UserContext } from "../contexts/Admin_UserContext";
 import { Navigate } from "react-router-dom";
 import { MenuContext } from "../contexts/Admin_MenuContext";
 import Recentorder_Card from "../compoents/Recentorder_Card";
+import Dash_Chart from "../compoents/Dash_Chart";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
 import { Grid, Pagination } from "swiper/modules";
-
+import faker from "faker";
 export default function Admin_IndexPage() {
   return (
     <>
@@ -115,7 +116,9 @@ export default function Admin_IndexPage() {
               <div className="dashboard dash_numofpaymentbox">
                 <p className="dash_boxtitle">결제완료 건수</p>
                 <div className="__dash_numofpaymentbox">
-                  <div className="__nop_chartbox">차트</div>
+                  <div className="__nop_chartbox">
+                    <Dash_Chart />
+                  </div>
                   <div className="__nop_chartsidebox">
                     {/* 오늘 */}
                     <p>
