@@ -7,6 +7,7 @@
 .P_Btn_Container {
     display: flex;
     background-color: #d4fcff;
+    margin-bottom: 50px;
 }
 
 .P_Btn_Css {
@@ -19,7 +20,7 @@
     border: 0;
     background-color: transparent;
     margin: 30px 40px 30px 40px;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .Inner_Btn_box {
@@ -47,5 +48,92 @@
     font-size: 20px;
     margin-left: 550px;
     padding: 15px 40px 15px 40px;
-    cursor: pointer
+    cursor: pointer;
+}
+
+.Product_bar {
+    background-color: #d4fcff;
+    width: 75%;
+    margin: auto;
+    border-top: solid black 1px;
+    border-bottom: solid black 1px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Product_bar>span {
+    font-size: 20px;
+    margin: 15px;
+}
+
+.Product_bar>span:nth-child(1) {
+    margin-left: 80px;
+}
+
+.Product_bar>span:nth-child(2) {
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+
+.Product_bar>span:nth-child(5) {
+    margin-right: 80px;
+}
+
+.P_list_container {
+    width: 75%;
+    margin: auto;
+    border-bottom: solid black 1px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.P_list_container>span {
+    font-size: 20px;
+    margin: 15px;
+}
+
+.P_list_btn {
+    background-color: #d4fcff;
+    margin-left: 80px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 0 5px 0 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.P_list_container>span:nth-child(2) {
+    padding-left: 80px;
+    padding-right: 70px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+}
+
+.P_list_container>span:nth-child(3) {
+    padding-left: 30px;
+    padding-right: 10px;
+    text-align: center;
+}
+
+.P_list_container>span:nth-child(4) {
+    padding-left: 30px;
+    padding-right: 20px;
+    text-align: center;
+
+}
+
+
+.P_list_container>span:nth-child(5) {
+    margin-right: 80px;
+    text-align: center;
+}
+
+.P_list_Img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
 }
