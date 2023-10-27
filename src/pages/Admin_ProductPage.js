@@ -2,6 +2,9 @@ import "../css/Admin_ProductPage.css";
 
 
 export default function Admin_ProductPage() {
+    function LinkAddPage() {
+        window.location = '/product_add'
+    }
     return (
         <>
             <main className="main_outlet font_01">
@@ -16,7 +19,7 @@ export default function Admin_ProductPage() {
                     <button className="P_Btn_Css font_01">품절
                         <span className="Inner_Btn_box">20</span>
                     </button>
-                    <button className="New_Product font_01">새 상품 등록</button>
+                    <button className="New_Product font_01" onClick={LinkAddPage}>새 상품 등록</button>
                 </div>
                 <div className="Product_bar">
                     <span>수정</span>

@@ -91,6 +91,7 @@
 .P_list_container>span {
     font-size: 20px;
     margin: 15px;
+    text-align: center;
 }
 
 .P_list_btn {
@@ -105,31 +106,28 @@
 }
 
 .P_list_container>span:nth-child(2) {
-    padding-left: 80px;
-    padding-right: 70px;
-    display: flex;
+    width: 230px;
     align-items: center;
     text-align: center;
 
 }
 
 .P_list_container>span:nth-child(3) {
-    padding-left: 30px;
-    padding-right: 10px;
+    width: 70px;
     text-align: center;
 }
 
 .P_list_container>span:nth-child(4) {
-    padding-left: 30px;
-    padding-right: 20px;
+    width: 70px;
     text-align: center;
 
 }
 
 
 .P_list_container>span:nth-child(5) {
-    margin-right: 80px;
+    margin-right: 70px;
     text-align: center;
+    width: 75px;
 }
 
 .P_list_Img {
