@@ -57,7 +57,7 @@ export default function Admin_Sidebar() {
         <div className="sidebar_productcontainer maincontainer">
           <Link
             to={"/product"}
-            className={location.pathname === "/product" || "/product_add" ? "active" : ""}
+            className={location.pathname === "/product" ? "active" : "" || location.pathname === "/product_add" ? "active" : ""}
           >
             <p>
               <i class="fa-solid fa-boxes-stacked"></i>
