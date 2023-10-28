@@ -1,0 +1,102 @@
+.ProductAdd_Page {
+    font-size: 60px;
+    text-align: left;
+    margin: 43px;
+}
+
+.ProductAdd_Container {
+    width: calc(100vw - 750px);
+    margin: auto;
+    height: auto;
+    margin-top: 80px;
+}
+
+.ProductAdd_Btn_Container {
+    float: right;
+    margin-right: 30px;
+}
+
+.ProductAdd_Btn_Container>button {
+    background-color: white;
+    font-size: 28px;
+    margin: 10px;
+    border-radius: 5px;
+    padding: 10px 20px 10px 20px;
+    cursor: pointer;
+}
+
+.ProductAdd_Btn_Container>button:nth-child(3) {
+    background-color: #485BFF;
+    color: white;
+}
+
+.Image_Plus {
+    background-color: white;
+    float: left;
+    border: solid black 1px;
+    width: 35%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.Image_Plus>div {
+    font-size: 28px;
+    margin: 20px 30px 20px 30px;
+    text-align: start;
+}
+
+.Image_Plus>div>button {
+    float: right;
+    background-color: #477BB5;
+    color: white;
+    font-size: 12px;
+    padding: 10px;
+    margin: -4px;
+    border-radius: 5px;
+    border: 0;
+
+}
+
+.Product_Info {
+    background-color: white;
+    float: right;
+    border: solid black 1px;
+    width: 60%;
+    border-radius: 10px;
+}
+
+.Image_Plus>img {
+    width: 200px;
+    height: 225px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+
+.P_Info_Categori {
+    font-size: 28px;
+    margin: 20px 30px 20px 30px;
+    text-align: start;
+}
+
+.input_Info_P {
+    width: 80%;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input_Info_P>span {
+    align-items: center;
+    font-size: 18px;
+    display: flex;
+    text-align: center;
+}
+
+.input_Info_P>input {
+    border-radius: 5px;
+    font-size: 18px;
+    width: 425px;
+    height: 35px;
+}
