@@ -62,7 +62,7 @@ export default function Dash_Chart() {
   };
   return (
     <>
-      <Line options={options} data={data} />;
+      <Line options={options} data={data} />
     </>
   );
 }
