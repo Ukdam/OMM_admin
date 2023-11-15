@@ -1,0 +1,75 @@
+.D_cancle_btn {
+    margin: 15px;
+    background-color: #FFFFFF;
+    border: 1;
+    border-radius: 15px;
+    font-size: 25px;
+    margin-left: 900px;
+    padding: 15px 40px 15px 40px;
+    cursor: pointer;
+}
+
+.D_save_btn {
+    margin: 15px;
+    background-color: #485BFF;
+    border: 1;
+    color: white;
+    border-radius: 15px;
+    font-size: 25px;
+    margin-left: 10px;
+    padding: 15px 40px 15px 40px;
+    cursor: pointer;
+}
+
+.detailcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    line-height: 75px;
+    font-size: 2rem;
+    
+  }
+  
+  .detailcontainer1 {
+    width: 600px;
+    height: 450px;
+    border: 1px solid #000;
+    margin-right: 25px; 
+    background: white;
+    padding-left: 100px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px ;
+  }
+  .detailcontainer-right{
+    width: 550px;
+  }
+  .detailcontainer2 {
+    height: 225px;
+    flex: 1;
+    border: 1px solid #000;
+    margin-bottom: 25px;
+    background: white;
+    padding-left: 50px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px ;
+  }
+  
+  .detailcontainer3 {
+    height: 200px;
+    flex: 1;
+    border: 1px solid #000;
+    background: white;
+    padding-left: 50px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px ;
+  }
+
+  .profile-font, .profile-font1{
+    font-size: 1.2rem;
+  }
+  
+  .no-margin{
+    margin-top: 0; /* 위쪽 마진 제거 */
+  margin-bottom: 0; /* 아래쪽 마진 제거 */
+  }
