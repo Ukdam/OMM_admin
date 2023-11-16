@@ -3,7 +3,7 @@
     background-color: #FFFFFF;
     border: 1;
     border-radius: 15px;
-    font-size: 25px;
+    font-size: 28px;
     margin-left: 900px;
     padding: 15px 40px 15px 40px;
     cursor: pointer;
@@ -37,13 +37,39 @@
     border: 1px solid #000;
     margin-right: 25px; 
     background: white;
-    padding-left: 100px;
+    /* padding-left: 100px; */
     border-radius: 10px;
     box-shadow: 1px 1px 3px ;
   }
   .detailcontainer-right{
     width: 550px;
   }
+
+  .detailcontainer1 > p:nth-child(1){
+    margin-left: 40px;
+  }
+
+  .profile_box {
+    width: 90%;
+    margin: auto;
+    border-top: 1px solid black;
+  }
+
+  .profile_box > p {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .profile_box > p > span {
+    width: 100px;
+  }
+
+  .profile_box > p > input {
+    height: 50px;
+    padding: 10px;
+  }
+
+
   .detailcontainer2 {
     height: 225px;
     flex: 1;
@@ -55,6 +81,27 @@
     box-shadow: 1px 1px 3px ;
   }
   
+  .detailright_box {
+    width: 90%;
+    border-top: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .detailright_box > div {
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    text-align: center;
+  }
+
+
+
+
+
   .detailcontainer3 {
     height: 200px;
     flex: 1;

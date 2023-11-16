@@ -1,9 +1,8 @@
 import "../css/Admin_UserPage.css";
 
-
 export default function Admin_UserPage() {
   function UserDetialPage() {
-    window.location = '/user_detail'
+    window.location = "/user_detail";
   }
   return (
     <>
@@ -18,22 +17,47 @@ export default function Admin_UserPage() {
         </div>
 
         <div className="Usertable_Line1">
-          <span>관리</span>
-          <span>아이디</span>
-          <span>이름</span>
-          <span>휴대번호</span>
-          <span>회원가입일</span>
+          <div>관리</div>
+          <div>아이디</div>
+          <div>이름</div>
+          <div>휴대번호</div>
+          <div>회원가입일</div>
+        </div>
+        {/* context */}
+        <div className="U_list_container">
+          <div>
+            <button className="U_detail_btn font_01" onClick={UserDetialPage}>
+              상세
+            </button>
+          </div>
+          <div>test01</div>
+          <div>장씨</div>
+          <div>010-1234-5678</div>
+          <div>2034-09-19</div>
         </div>
         <div className="U_list_container">
-          <button className="U_detail_btn" onClick={UserDetialPage}>상세</button>
-          <span>test01</span>
-          <span>장씨</span>
-          <span>010-1234-5678</span>
-          <span>2034-09-19</span>
+          <div>
+            <button className="U_detail_btn font_01" onClick={UserDetialPage}>
+              상세
+            </button>
+          </div>
+          <div>test01</div>
+          <div>장씨</div>
+          <div>010-1234-5678</div>
+          <div>2034-09-19</div>
+        </div>
+        <div className="U_list_container">
+          <div>
+            <button className="U_detail_btn font_01" onClick={UserDetialPage}>
+              상세
+            </button>
+          </div>
+          <div>test01</div>
+          <div>장씨</div>
+          <div>010-1234-5678</div>
+          <div>2034-09-19</div>
         </div>
       </main>
-
     </>
   );
 }
-

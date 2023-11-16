@@ -1,21 +1,23 @@
+import { Switch } from "@mui/material";
 import "../css/Admin_UserDetailPage.css";
-
 
 export default function Admin_UserDetailPage() {
   function UserPage() {
-    window.location = '/user'
+    window.location = "/user";
   }
   return (
     <>
       <main className="main_outlet font_01">
         <div className="user-title-container">회원상세정보</div>
-        <button className="D_cancle_btn font_01" onClick={UserPage}>취소</button>
-        <button className="D_save_btn font_01 ">저장</button>
+        <button className="D_cancle_btn font_01" onClick={UserPage}>
+          X
+        </button>
+        {/* <button className="D_save_btn font_01 ">저장</button> */}
         <div className="detailcontainer">
           <div className="detailcontainer1">
             <p>프로필</p>
-            <hr />
-            <div>
+            {/* <hr /> */}
+            <div className="profile_box">
               <p className="no-margin">
                 <span className="profile-font1">회원가입일</span>
                 <input
@@ -63,22 +65,38 @@ export default function Admin_UserDetailPage() {
               </p>
             </div>
           </div>
+
+          {/* 마케팅 광고 수신 동의 */}
           <div className="detailcontainer-right">
             <div className="detailcontainer2">
               <p>마케팅 광고 수신 동의</p>
-              <hr />
-              <p className="profile-font1">이메일</p>
-              <p className="profile-font1">sms</p>
+              {/* <hr /> */}
+              <div className="detailright_box">
+                <div>
+                  <p className="profile-font1">이메일</p>
+                  <div>
+                    <Switch />
+                  </div>
+                </div>
+
+                <div>
+                  <p className="profile-font1">sms</p>
+                  <div>
+                    <Switch />
+                  </div>
+                </div>
+              </div>
             </div>
+
+            {/* 선택적 동의 항목 */}
             <div className="detailcontainer3">
               <p>선택적 동의 항목</p>
-              <hr />
+              {/* <hr /> */}
               <p className="profile-font1">개인정보 수집 동의</p>
             </div>
           </div>
         </div>
       </main>
-
     </>
   );
 }
