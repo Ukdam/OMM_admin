@@ -23,6 +23,7 @@ export default function Admin_UserPage() {
           <div>휴대번호</div>
           <div>회원가입일</div>
         </div>
+
         {/* context */}
         <div className="U_list_container">
           <div>

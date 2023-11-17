@@ -91,8 +91,13 @@ export default function Admin_UserDetailPage() {
             {/* 선택적 동의 항목 */}
             <div className="detailcontainer3">
               <p>선택적 동의 항목</p>
-              {/* <hr /> */}
-              <p className="profile-font1">개인정보 수집 동의</p>
+
+              <div className="detailright_box2">
+                <p className="profile-font1">개인정보 수집 동의</p>
+                <div>
+                  <Switch />
+                </div>
+              </div>
             </div>
           </div>
         </div>

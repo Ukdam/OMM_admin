@@ -104,7 +104,6 @@
 
   .detailcontainer3 {
     height: 200px;
-    flex: 1;
     border: 1px solid #000;
     background: white;
     padding-left: 50px;
@@ -112,8 +111,15 @@
     box-shadow: 1px 1px 3px ;
   }
 
+  .detailright_box2 {
+    width: 90%;
+    border-top: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+  }
+
   .profile-font, .profile-font1{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
   
   .no-margin{

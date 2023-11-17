@@ -1,5 +1,5 @@
 .user-title-container {
-  background: #F1FEFF;
+  background: white;
   text-align: left;
   line-height: 150px;
   font-size: 3rem;
@@ -132,7 +132,8 @@ margin-left: 1045px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .U_list_container>div {
