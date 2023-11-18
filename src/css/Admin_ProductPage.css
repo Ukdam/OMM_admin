@@ -1,137 +1,143 @@
 .Product_Page {
-    font-size: 60px;
-    text-align: left;
-    margin: 43px;
+  font-size: 60px;
+  text-align: left;
+  margin: 43px;
+}
+
+.p_title_container {
+  width: 100%;
+  height: 150px;
+  background-color: white;
+  text-align: left;
+  line-height: 150px;
+  font-size: 3rem;
+  padding-left: 100px;
 }
 
 .P_Btn_Container {
-    display: flex;
-    background-color: #d4fcff;
-    margin-bottom: 50px;
+  display: flex;
+  background-color: #d4fcff;
+  margin-bottom: 50px;
 }
 
 .P_Btn_Css {
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 35px;
-    border: 0;
-    background-color: transparent;
-    margin: 30px 40px 30px 40px;
-    cursor: pointer;
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 35px;
+  border: 0;
+  background-color: transparent;
+  margin: 30px 40px 30px 40px;
+  cursor: pointer;
 }
 
 .Inner_Btn_box {
-    margin-top: 5px;
-    font-size: 15px;
-    text-align: center;
-    flex-grow: 1;
-    background-color: black;
-    color: white;
-    border-radius: 15px;
-    padding: 7px 15px 7px 15px;
-    margin: 0px 10px 0px 10px;
+  margin-top: 5px;
+  font-size: 15px;
+  text-align: center;
+  flex-grow: 1;
+  background-color: black;
+  color: white;
+  border-radius: 15px;
+  padding: 7px 15px 7px 15px;
+  margin: 0px 10px 0px 10px;
 }
 
 .P_Btn_Css:nth-child(1) {
-    margin-left: 100px;
+  margin-left: 100px;
 }
 
 .New_Product {
-    margin: 15px;
-    background-color: #485BFF;
-    border: 0;
-    color: white;
-    border-radius: 15px;
-    font-size: 20px;
-    margin-left: 550px;
-    padding: 15px 40px 15px 40px;
-    cursor: pointer;
+  margin: 15px;
+  background-color: #485bff;
+  border: 0;
+  color: white;
+  border-radius: 15px;
+  font-size: 20px;
+  margin-left: 550px;
+  padding: 15px 40px 15px 40px;
+  cursor: pointer;
 }
 
 .Product_bar {
-    background-color: #d4fcff;
-    width: 75%;
-    margin: auto;
-    border-top: solid black 1px;
-    border-bottom: solid black 1px;
-    display: flex;
-    justify-content: space-between;
+  background-color: #d4fcff;
+  width: 75%;
+  margin: auto;
+  border-top: solid black 1px;
+  border-bottom: solid black 1px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.Product_bar>span {
-    font-size: 20px;
-    margin: 15px;
+.Product_bar > span {
+  font-size: 20px;
+  margin: 15px;
 }
 
-.Product_bar>span:nth-child(1) {
-    margin-left: 80px;
+.Product_bar > span:nth-child(1) {
+  margin-left: 80px;
 }
 
-.Product_bar>span:nth-child(2) {
-    padding-left: 70px;
-    padding-right: 70px;
+.Product_bar > span:nth-child(2) {
+  padding-left: 70px;
+  padding-right: 70px;
 }
 
-
-.Product_bar>span:nth-child(5) {
-    margin-right: 80px;
+.Product_bar > span:nth-child(5) {
+  margin-right: 80px;
 }
 
 .P_list_container {
-    width: 75%;
-    margin: auto;
-    border-bottom: solid black 1px;
-    display: flex;
-    justify-content: space-between;
+  width: 75%;
+  margin: auto;
+  border-bottom: solid black 1px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.P_list_container>span {
-    font-size: 20px;
-    margin: 15px;
-    text-align: center;
+.P_list_container > span {
+  font-size: 20px;
+  margin: 15px;
+  text-align: center;
 }
 
 .P_list_btn {
-    background-color: #d4fcff;
-    margin-left: 80px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    padding: 0 5px 0 5px;
-    font-size: 15px;
-    cursor: pointer;
+  background-color: #d4fcff;
+  margin-left: 80px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 0 5px 0 5px;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-.P_list_container>span:nth-child(2) {
-    width: 230px;
-    align-items: center;
-    text-align: center;
-
+.P_list_container > span:nth-child(2) {
+  width: 230px;
+  align-items: center;
+  text-align: center;
 }
 
-.P_list_container>span:nth-child(3) {
-    width: 70px;
-    text-align: center;
+.P_list_container > span:nth-child(3) {
+  width: 70px;
+  text-align: center;
 }
 
-.P_list_container>span:nth-child(4) {
-    width: 70px;
-    text-align: center;
-
+.P_list_container > span:nth-child(4) {
+  width: 70px;
+  text-align: center;
 }
 
-
-.P_list_container>span:nth-child(5) {
-    margin-right: 70px;
-    text-align: center;
-    width: 75px;
+.P_list_container > span:nth-child(5) {
+  margin-right: 70px;
+  text-align: center;
+  width: 75px;
 }
 
 .P_list_Img {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
 }

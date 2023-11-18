@@ -46,7 +46,23 @@ export default function Admin_Sidebar() {
         <div className="sidebar_ordercontainer maincontainer">
           <Link
             to={"/order"}
-            className={location.pathname === "/order" ? "active" : ""}
+            className={
+              location.pathname === "/order"
+                ? "active"
+                : "" || location.pathname === "/order/allOrder"
+                ? "active"
+                : "" || location.pathname === "/order/beforeOrder"
+                ? "active"
+                : "" || location.pathname === "/order/acceptOrder"
+                ? "active"
+                : "" || location.pathname === "/order/onDelivery"
+                ? "active"
+                : "" || location.pathname === "/order/deliveryCompleted"
+                ? "active"
+                : "" || location.pathname === "/order/cancelOrder"
+                ? "active"
+                : ""
+            }
           >
             <p>
               <i class="fa-solid fa-cart-shopping"></i>
@@ -92,7 +108,13 @@ export default function Admin_Sidebar() {
         <div className="sidebar_noticecontainer maincontainer">
           <Link
             to={"/review"}
-            className={location.pathname === "/review" ? "active" : ""}
+            className={
+              location.pathname === "/review"
+                ? "active"
+                : "" || location.pathname === "/review_id"
+                ? "active"
+                : ""
+            }
           >
             <p>
               <i class="fa-solid fa-clipboard-list"></i>

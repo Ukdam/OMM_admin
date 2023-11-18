@@ -1,0 +1,83 @@
+.main_outlet {
+  width: 81%;
+  text-align: center;
+  position: absolute;
+  right: 0;
+}
+.main_flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.op_main_container {
+  width: 100%;
+  height: 770px;
+  overflow-y: scroll;
+}
+
+.op_title_container {
+  width: 100%;
+  height: 150px;
+  background-color: white;
+  text-align: left;
+  line-height: 150px;
+  font-size: 3rem;
+  padding-left: 100px;
+}
+
+.op_tap_container {
+  width: 1554px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background-color: #aed581;
+  position: fixed;
+  top: 150px;
+}
+.op_tap_container > * {
+  flex: 1;
+  height: 100%;
+  line-height: 50px;
+}
+
+.op_tap_container > button {
+  cursor: pointer;
+  background-color: inherit;
+  font-size: 18px;
+}
+.op_tap_container > button:hover {
+  color: #276ca5;
+  transition: 0.5s;
+}
+.op_tap_container > button:active {
+  background: radial-gradient(circle, #dcedc8, #c5e1a5, #aed581);
+  /* background-color: #c4d4b0; */
+  transition: 1s;
+}
+
+.op_tap_selectBtn {
+  border: none;
+  border-bottom: 3px solid #2196f3;
+}
+
+.op_tapContent_container {
+  width: 100%;
+  height: 600px;
+  margin-top: 50px;
+  padding: 20px 20px 0px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.op_test_box {
+  background-color: white;
+  width: 700px;
+  height: 350px;
+  border-radius: 20px;
+  border: 1px solid rgb(238, 238, 238);
+  box-shadow: 1px 1px 1px 1px #cfcfcf;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}

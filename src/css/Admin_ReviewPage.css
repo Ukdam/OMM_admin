@@ -22,9 +22,20 @@
 }
 
 .rp_search_container {
-  width: 100%;
+  width: 90%;
   height: 100px;
   line-height: 100px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+  text-align: center;
+  justify-content: right;
+}
+
+.rp_search_box {
+  width: 30%;
+  height: 56px;
+  background-color: white;
 }
 
 .rp_table_header {
@@ -35,7 +46,7 @@
   align-items: center;
   justify-content: space-between;
   font-size: 22px;
-  background-color: aquamarine;
+  background-color: rgb(108, 221, 184);
   border-top: 1px solid black;
   border-bottom: 1px solid black;
 }
@@ -68,7 +79,211 @@
 .rp_table_list > div:nth-child(2) {
   width: 30%;
   display: inline-block;
-  white-space:nowrap; 
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.rp_table_list > div > p:hover {
+  color: rgb(133, 133, 133);
+  transition: 0.3s;
+}
+
+/* 모달 */
+
+.rp_modal_container {
+  width: 1000px;
+  height: 800px;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  position: relative;
+  top: 10%;
+  left: 30%;
+}
+
+/* 모달 타이틀 */
+
+.rp_modal_title {
+  width: 100%;
+  height: 60px;
+  font-size: 30px;
+  line-height: 60px;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.rp_modal_title > .rp_modal_closebtn {
+  width: 35px;
+  height: 35px;
+  background-color: tomato;
+  border: 0px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  line-height: 8px;
+}
+
+.rp_modal_title > .rp_modal_closebtn:hover {
+  background-color: rgb(255, 142, 104);
+}
+
+/* 모달 메인 */
+.rp_modal_main {
+  width: 90%;
+  height: 700px;
+  margin-top: 10px;
+  align-self: center;
+  border: 3px solid rgb(236, 236, 236);
+  background-color: gainsboro;
+  border-radius: 10px;
+  overflow-y: scroll;
+  flex-direction: column;
+}
+
+/* scroll 숨기기 */
+.rp_modal_main {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.rp_modal_main::-webkit-scrollbar {
+  display: none; /* Chrome , Safari , Opera */
+}
+
+/* .rp_modal_main > * {
+  border: 1px solid tomato;
+}
+
+.rp_modal_main > * > * {
+  border: 1px solid skyblue;
+} */
+
+.rp_modal_imageContainer {
+  width: 100%;
+  height: 250px;
+  overflow-x: scroll;
+  white-space: nowrap;
+  align-items: center;
+  text-align: center;
+  padding-left: 16px;
+  /* 스크롤 숨기기 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+
+.rp_modal_imageContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.rp_modal_imagebox {
+  display: inline-block;
+  width: 300px;
+  height: 200px;
+  margin-right: 16px;
+  margin-top: 25px;
+  border-radius: 10px;
+  background-color: white;
+  /* object-fit: cover; */
+}
+
+/* 모달 기본 정보 영역 */
+.rp_modal_basicInfoContainer {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rp_modal_basicInfoContainer > * {
+  flex: 1;
+  height: 100%;
+  line-height: 75px;
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+.rp_modal_basicInfoContainer > div:nth-child(2) {
+  line-height: 90px;
+  text-align: center;
+}
+
+.rp_modal_basicInfoContainer > div:nth-child(3) {
+  text-align: right;
+  padding-right: 10px;
+}
+
+/* 모달 재료 영역 */
+.rp_modal_ingredientContainer {
+  width: 100%;
+  min-height: 50px;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* 모달 내용 및 답글 영역 */
+.rp_modal_contextContainer {
+  width: 95%;
+  min-height: 200px;
+  height: auto;
+  margin: 20px auto 20px auto;
+  /* margin-top: 20px; */
+  /* margin-bottom: 20px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.rp_modal_contextBox {
+  display: block;
+  background-color: whitesmoke;
+  width: auto;
+  max-width: 600px;
+  height: auto;
+  margin: 10px 0 20px 10px;
+  padding: 10px;
+  border-radius: 15px 15px 15px 0px;
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  color: #333;
+}
+
+.rp_modal_replyBox {
+  display: block;
+  align-self: flex-end;
+  background-color: #2196f3;
+  width: auto;
+  max-width: 600px;
+  height: auto;
+  margin: 0px 10px 20px 0px;
+  padding: 10px;
+  border-radius: 15px 15px 0px 15px;
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  color: white;
+}
+
+.rp_modal_replyContainer {
+  width: 95%;
+  min-height: 50px;
+  height: auto;
+  align-items: flex-end;
+  display: flex;
+  margin: 0px auto 10px auto;
 }
