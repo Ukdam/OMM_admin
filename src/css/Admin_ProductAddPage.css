@@ -107,6 +107,13 @@
     text-align: center;
 }
 
+.input_Select {
+    font-size: 18px;
+    width: 425px;
+    height: 35px;
+    border-radius: 5px;
+}
+
 .input_Info_P>input {
     border-radius: 5px;
     font-size: 18px;

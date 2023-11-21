@@ -3,8 +3,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Admin_ProductAddPage() {
+    // 선택한 카테고리를 저장하는 상태
+    const [category, setCategory] = useState("");
 
-
+    const handleCategoryChange = (e) => {
+        setCategory(e.target.value); // 선택한 카테고리 값을 상태에 저장
+    };
 
     //전시 상태 true or false
     const [isChecked, setIsChecked] = useState(false);
@@ -41,12 +45,19 @@ export default function Admin_ProductAddPage() {
                         <hr />
                         <div className="input_Info_P">
                             <span>카테고리</span>
-                            <input
-                                className="font_01"
-                                placeholder="카테고리"
-                                value={""}
-                                type="text"
-                            ></input>
+                            <select
+
+                                className="input_Select font_01"
+                                value={category}
+                                onChange={handleCategoryChange}
+                            >
+                                <option value="">카테고리를 선택하세요</option>
+                                <option value="채소">채소</option>
+                                <option value="고기">고기</option>
+                                <option value="밥/면">밥/면</option>
+                                <option value="소스">소스</option>
+                                <option value="추가">추가</option>
+                            </select>
                         </div>
                         <div className="input_Info_P">
                             <span>상품명</span>
