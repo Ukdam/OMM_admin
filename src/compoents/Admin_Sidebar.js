@@ -38,7 +38,7 @@ export default function Admin_Sidebar() {
         <div className="sidebar_dashboardcontainer maincontainer">
           <Link to={"/"} className={location.pathname === "/" ? "active" : ""}>
             <p>
-              <i class="fa-solid fa-table-columns"></i>
+              <i className="fa-solid fa-table-columns"></i>
             </p>
             <p>대시보드</p>
           </Link>
@@ -50,22 +50,22 @@ export default function Admin_Sidebar() {
               location.pathname === "/order"
                 ? "active"
                 : "" || location.pathname === "/order/allOrder"
-                ? "active"
-                : "" || location.pathname === "/order/beforeOrder"
-                ? "active"
-                : "" || location.pathname === "/order/acceptOrder"
-                ? "active"
-                : "" || location.pathname === "/order/onDelivery"
-                ? "active"
-                : "" || location.pathname === "/order/deliveryCompleted"
-                ? "active"
-                : "" || location.pathname === "/order/cancelOrder"
-                ? "active"
-                : ""
+                  ? "active"
+                  : "" || location.pathname === "/order/beforeOrder"
+                    ? "active"
+                    : "" || location.pathname === "/order/acceptOrder"
+                      ? "active"
+                      : "" || location.pathname === "/order/onDelivery"
+                        ? "active"
+                        : "" || location.pathname === "/order/deliveryCompleted"
+                          ? "active"
+                          : "" || location.pathname === "/order/cancelOrder"
+                            ? "active"
+                            : ""
             }
           >
             <p>
-              <i class="fa-solid fa-cart-shopping"></i>
+              <i className="fa-solid fa-cart-shopping"></i>
             </p>
             <p>주문</p>
           </Link>
@@ -77,12 +77,12 @@ export default function Admin_Sidebar() {
               location.pathname === "/product"
                 ? "active"
                 : "" || location.pathname === "/product_add"
-                ? "active"
-                : ""
+                  ? "active"
+                  : ""
             }
           >
             <p>
-              <i class="fa-solid fa-boxes-stacked"></i>
+              <i className="fa-solid fa-boxes-stacked"></i>
             </p>
             <p>상품</p>
           </Link>
@@ -95,12 +95,12 @@ export default function Admin_Sidebar() {
               location.pathname === "/user"
                 ? "active"
                 : "" || location.pathname === "/user_detail"
-                ? "active"
-                : ""
+                  ? "active"
+                  : ""
             }
           >
             <p>
-              <i class="fa-solid fa-user"></i>
+              <i className="fa-solid fa-user"></i>
             </p>
             <p>회원</p>
           </Link>
@@ -112,12 +112,12 @@ export default function Admin_Sidebar() {
               location.pathname === "/review"
                 ? "active"
                 : "" || location.pathname === "/review_id"
-                ? "active"
-                : ""
+                  ? "active"
+                  : ""
             }
           >
             <p>
-              <i class="fa-solid fa-clipboard-list"></i>
+              <i className="fa-solid fa-clipboard-list"></i>
             </p>
             <p>후기</p>
           </Link>

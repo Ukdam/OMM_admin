@@ -18,6 +18,7 @@ import Admin_OnDeliveryPage from "./pages/OrderPages/Admin_OnDeliveryPage";
 import Admin_DeliveryCompletedPage from "./pages/OrderPages/Admin_DeliveryCompletedPage";
 import Admin_AcceptOrderPage from "./pages/OrderPages/Admin_AcceptOrderPage";
 import Admin_CancelOrderPage from "./pages/OrderPages/Admin_CancelOrderPage";
+import Admin_ProductAddUpdate from "./pages/Admin_ProductAddUpdate";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
               <Route path="review" element={<Admin_ReviewPage />} />
               <Route path="product" element={<Admin_ProductPage />} />
               <Route path="product_add" element={<Admin_ProductAddPage />} />
+              <Route path="product_addUpdate/:id" element={<Admin_ProductAddUpdate />} />
             </Route>
           </Routes>
         </MenuContextProvider>

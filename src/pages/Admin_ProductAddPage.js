@@ -1,8 +1,12 @@
 import "../css/Admin_ProductAddPage.css"
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 
 export default function Admin_ProductAddPage() {
+    const [ProductName, setProductName] = useState("");
+    const [Price, setPrice] = useState("");
+    let fileInput = useRef();
+
     // 선택한 카테고리를 저장하는 상태
     const [category, setCategory] = useState("");
 
@@ -16,8 +20,45 @@ export default function Admin_ProductAddPage() {
     const P_CheckedHandler = (e) => {
         setIsChecked(e.target.checked);
     };
+    //사진추가
+
+    const [selectedImage, setSelectedImage] = useState(null);
+    const imageUploader = useRef(null);
 
 
+
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        setSelectedImage(URL.createObjectURL(file));
+        fileInput.current = file; // 파일 정보를 fileInput에 저장
+    };
+
+    const onFileUpload = () => {
+
+        const formData = new FormData();
+        formData.append("file", fileInput.current);
+
+        fetch("http://localhost:4000/admin/upload", {
+            method: 'POST',
+            body: formData
+        });
+    };
+
+    const [redirect, setRedirect] = useState(false);
+    const OnFileUpload2 = async () => {
+        const response = await fetch("http://localhost:4000/admin/product", {
+            method: "POST",
+            body: JSON.stringify({ category, ProductName, isChecked, Price }),
+            headers: { "Content-Type": "application/json" },
+
+        });
+        if (response.status === 200) {
+            setRedirect(true);
+        } else {
+            alert("정보 보내기 실패");
+        }
+    }
+    if (redirect) return <Navigate to={"/product"} />;
 
     return (
         <>
@@ -29,16 +70,31 @@ export default function Admin_ProductAddPage() {
                         <button className="font_01">목록보기</button>
                     </Link>
                     <button className="font_01">삭제</button>
-                    <button className="font_01">저장</button>
+                    <button
+                        className="font_01"
+                        onClick={(event) => { event.preventDefault(); onFileUpload(); OnFileUpload2(); }}
+                    >저장</button>
                 </div>
                 <div className="ProductAdd_Container">
                     <div className="Image_Plus">
                         <div>
                             이미지
-                            <button>이미지 추가</button>
+                            <input
+                                type="file"
+                                accept=".jpg, .png"
+                                onChange={handleImageUpload}
+                                ref={imageUploader}
+                                style={{ display: 'none' }}
+                            />
+                            <button onClick={(event) => {
+                                event.preventDefault();
+                                imageUploader.current.click();
+                            }}>이미지 추가</button>
                         </div>
                         <hr />
-                        <img src="/img/sangchu.png" alt="재료사진" />
+                        <div id="imageContainer" style={{ width: "85%", height: 330, zIndex: 1 }}>
+                            {selectedImage && <img src={selectedImage} alt="selected" style={{ width: "100%", height: "100%" }} />}
+                        </div>
                     </div>
                     <div className="Product_Info">
                         <div className="P_Info_Categori">기본 정보</div>
@@ -64,7 +120,8 @@ export default function Admin_ProductAddPage() {
                             <input
                                 className="font_01"
                                 placeholder="상품명"
-                                value={""}
+                                value={ProductName}
+                                onChange={(e) => setProductName(e.target.value)}
                                 type="text"
                             ></input>
                         </div>
@@ -84,7 +141,8 @@ export default function Admin_ProductAddPage() {
                             <input
                                 className="font_01"
                                 placeholder="판매금액"
-                                value={""}
+                                value={Price}
+                                onChange={(e) => setPrice(e.target.value)}
                                 type="text"
                             ></input>
                         </div>
