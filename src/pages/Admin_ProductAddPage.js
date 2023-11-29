@@ -6,6 +6,7 @@ export default function Admin_ProductAddPage() {
     const [ProductName, setProductName] = useState("");
     const [Price, setPrice] = useState("");
     let fileInput = useRef();
+    const [redirect, setRedirect] = useState(false);
 
     // 선택한 카테고리를 저장하는 상태
     const [category, setCategory] = useState("");
@@ -33,31 +34,27 @@ export default function Admin_ProductAddPage() {
         fileInput.current = file; // 파일 정보를 fileInput에 저장
     };
 
-    const onFileUpload = () => {
-
+    const onFileUpload = async () => {
         const formData = new FormData();
-        formData.append("file", fileInput.current);
+        const file = fileInput.current; // 파일 이름 변경하지 않음
 
-        fetch("http://localhost:4000/admin/upload", {
+        formData.append("file", file);
+        formData.append("productName", ProductName);
+        formData.append("category", category);
+        formData.append("isChecked", isChecked);
+        formData.append("price", Price);
+
+        const response = await fetch("http://localhost:4000/admin/upload", {
             method: 'POST',
             body: formData
         });
-    };
 
-    const [redirect, setRedirect] = useState(false);
-    const OnFileUpload2 = async () => {
-        const response = await fetch("http://localhost:4000/admin/product", {
-            method: "POST",
-            body: JSON.stringify({ category, ProductName, isChecked, Price }),
-            headers: { "Content-Type": "application/json" },
-
-        });
         if (response.status === 200) {
             setRedirect(true);
         } else {
             alert("정보 보내기 실패");
         }
-    }
+    };
     if (redirect) return <Navigate to={"/product"} />;
 
     return (
@@ -72,7 +69,7 @@ export default function Admin_ProductAddPage() {
                     <button className="font_01">삭제</button>
                     <button
                         className="font_01"
-                        onClick={(event) => { event.preventDefault(); onFileUpload(); OnFileUpload2(); }}
+                        onClick={(event) => { event.preventDefault(); onFileUpload(); }}
                     >저장</button>
                 </div>
                 <div className="ProductAdd_Container">

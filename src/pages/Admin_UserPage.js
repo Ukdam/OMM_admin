@@ -1,29 +1,16 @@
 import "../css/Admin_UserPage.css";
 
 import {
-  Backdrop,
-  Chip,
-  Divider,
-  Fade,
   IconButton,
   InputAdornment,
-  Modal,
-  Rating,
   TextField,
-  styled,
+
 } from "@mui/material";
 import "../css/Admin_ReviewPage.css";
 import { useState } from "react";
 import {
-  Close,
   Search,
-  Send,
-  ThumbUp,
-  ThumbUpOffAlt,
 } from "@mui/icons-material";
-import { useRef } from "react";
-import Ingredient_DATA from "../datas/Ingredient_DATA.json";
-import { lightGreen } from "@mui/material/colors";
 
 
 export default function Admin_UserPage() {
@@ -39,27 +26,27 @@ export default function Admin_UserPage() {
       <main className="main_outlet font_01">
         <div className="user-title-container">회원</div>
         <div className="rp_search_container">
-        <div className="rp_search_box">
-              <TextField
-                fullWidth
-                id="rp_searchInput"
-                label="검색"
-                value={searchText}
-                onChange={(event) => {
-                  setSearchText(event.target.value);
-                }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton color="primary" sx={{ p: "10px" }}>
-                        <Search />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              </div>
-            </div>
+          <div className="rp_search_box">
+            <TextField
+              fullWidth
+              id="rp_searchInput"
+              label="검색"
+              value={searchText}
+              onChange={(event) => {
+                setSearchText(event.target.value);
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton color="primary" sx={{ p: "10px" }}>
+                      <Search />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
+        </div>
 
         <div className="Usertable_Line1">
           <div>관리</div>

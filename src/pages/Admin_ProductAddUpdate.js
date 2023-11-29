@@ -8,6 +8,7 @@ export default function Admin_ProductAddUpdate() {
     const [ProductName, setProductName] = useState("");
     const [Price, setPrice] = useState("");
     let fileInput = useRef();
+    const [redirect, setRedirect] = useState(false);
 
     //수정 url에서 아이디 가져오기
     const { id } = useParams();
@@ -28,6 +29,7 @@ export default function Admin_ProductAddUpdate() {
                 setCategory(data.category); // 카테고리 초기화
                 setPrice(data.Price); // 가격 초기화
                 setIsChecked(data.isChecked); // 체크 상태 초기화
+                setSelectedImage(data.ImageUrl);//이미지 url 초기화
             })
             .catch(error => console.error("Error:", error));
     }, [id]);
@@ -47,7 +49,7 @@ export default function Admin_ProductAddUpdate() {
     };
     //사진추가
 
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState("");
     const imageUploader = useRef(null);
 
 
@@ -55,42 +57,31 @@ export default function Admin_ProductAddUpdate() {
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
         setSelectedImage(URL.createObjectURL(file));
+        console.log(setSelectedImage)
         fileInput.current = file; // 파일 정보를 fileInput에 저장
     };
 
-    const onFileUpload = () => {
-
+    const onFileUpload = async () => {
         const formData = new FormData();
-        formData.append("file", fileInput.current);
+        const file = fileInput.current; // 파일 이름 변경하지 않음
 
-        fetch("http://localhost:4000/admin/upload", {
+        formData.append("file", file);
+        formData.append("productName", ProductName);
+        formData.append("category", category);
+        formData.append("isChecked", isChecked);
+        formData.append("price", Price);
+
+        const response = await fetch("http://localhost:4000/admin/upload", {
             method: 'POST',
             body: formData
         });
-    };
 
-    const [redirect, setRedirect] = useState(false);
-    const OnFileUpload2 = async () => {
-        fetch(`http://localhost:4000/admin/Productdata/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                ProductName: ProductName,
-                category: category,
-                Price: Price,
-                isChecked: isChecked,
-            }),
-        })
-            .then(response => response.json())
-            .then(data => {
-                setRedirect(true);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    }
+        if (response.status === 200) {
+            setRedirect(true);
+        } else {
+            alert("정보 보내기 실패");
+        }
+    };
     if (redirect) return <Navigate to={"/product"} />;
 
     return (
@@ -106,7 +97,7 @@ export default function Admin_ProductAddUpdate() {
                         <button className="font_01">삭제</button>
                         <button
                             className="font_01"
-                            onClick={(event) => { event.preventDefault(); onFileUpload(); OnFileUpload2(); }}
+                            onClick={(event) => { event.preventDefault(); onFileUpload(); }}
                         >저장</button>
                     </div>
                     <div className="ProductAdd_Container">
