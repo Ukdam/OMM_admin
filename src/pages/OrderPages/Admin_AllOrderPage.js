@@ -1,28 +1,30 @@
 import { Chip } from "@mui/material";
 import "../../css/Admin_OrderPage.css";
 import { Outlet } from "react-router-dom";
+import OrderCards from "../../compoents/OrderCards";
+import { useEffect, useState } from "react";
 
 export default function Admin_AllOrderPage() {
-  // const [orderlists, setOrderlists] = useState([]);
-  // useEffect(() => {
-  //   const orderlistData = async () => {
-  //     try {
-  //       const response = await fetch("http://localhost:4000/admin/orderlist", {
-  //         credentials: "include",
-  //       });
-  //       const orderlists = await response.json();
-  //       setOrderlists(orderlists);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
+  const [orderlists, setOrderlists] = useState([]);
+  useEffect(() => {
+    const orderlistData = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/admin/orderlist", {
+          credentials: "include",
+        });
+        const orderlists = await response.json();
+        setOrderlists(orderlists);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  //   orderlistData();
-  //   const intervalId = setInterval(orderlistData, 5000);
+    orderlistData();
+    const intervalId = setInterval(orderlistData, 5000);
 
-  //   // 컴포넌트가 언마운트되면 setInterval을 해제
-  //   return () => clearInterval(intervalId);
-  // }, []);
+    // 컴포넌트가 언마운트되면 setInterval을 해제
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <>
@@ -119,20 +121,11 @@ export default function Admin_AllOrderPage() {
             </p>
           </button>
         </div>
-        {/* {orderlists.length > 0 &&
-              orderlists.map((orderlist) => (
-                <Admin_OrderCard {...orderlist} key={orderlist._id} />
-              ))} */}
-
         <div className="op_tapContent_container">
-          <div className="op_test_box">주문카드</div>
-          <div className="op_test_box">주문카드</div>
-          <div className="op_test_box">주문카드</div>
-          <div className="op_test_box">주문카드</div>
-          <div className="op_test_box">주문카드</div>
-          <div className="op_test_box">주문카드</div>
-          <div className="op_test_box">주문카드</div>
-          <div className="op_test_box">주문카드</div>
+          {orderlists.length > 0 &&
+            orderlists.map((orderlist) => (
+              <OrderCards {...orderlist} key={orderlist._id} />
+            ))}
         </div>
       </div>
     </>

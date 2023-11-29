@@ -1,0 +1,12 @@
+.orderCard_container {
+  background-color: white;
+  width: calc(50% - 50px);
+  height: 350px;
+  border-radius: 20px;
+  border: 1px solid rgb(238, 238, 238);
+  box-shadow: 1px 1px 1px 1px #cfcfcf;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  margin-left: 35px;
+}
