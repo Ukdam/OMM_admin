@@ -1,5 +1,16 @@
 .orderc_container {
-  width: 700px;
+  background-color: white;
+  width: calc(50% - 50px);
+  height: 400px;
+  border-radius: 20px;
+  border: 1px solid rgb(238, 238, 238);
+  box-shadow: 1px 1px 1px 1px #cfcfcf;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  margin-left: 35px;
+  justify-content: space-around;
+  /* width: 700px;
   height: 350px;
   background-color: white;
   border-radius: 20px;
@@ -7,7 +18,7 @@
   margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
-  box-shadow: 1px 1px 1px 1px #a7a7a7;
+  box-shadow: 1px 1px 1px 1px #a7a7a7; */
 }
 .orderc_container > * {
   width: 100%;
@@ -55,6 +66,18 @@
   width: 70%;
   font-size: 1.2rem;
   line-height: 100px;
+  overflow: scroll;
+  
+}
+/* 스크롤 바 없애기 */
+/* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
+.__order_context::-webkit-scrollbar,
+.__order_context::-webkit-scrollbar {
+  display: none;
+}
+.__order_context {
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
 }
 
 .__order_remain {

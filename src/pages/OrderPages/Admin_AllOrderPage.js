@@ -1,25 +1,27 @@
 import { Chip } from "@mui/material";
 import "../../css/Admin_OrderPage.css";
-import { Outlet } from "react-router-dom";
 import OrderCards from "../../compoents/OrderCards";
 import { useEffect, useState } from "react";
+import Admin_OrderCard from "../../compoents/Admin_OrderCard";
 
 export default function Admin_AllOrderPage() {
   const [orderlists, setOrderlists] = useState([]);
   useEffect(() => {
     const orderlistData = async () => {
       try {
-        const response = await fetch("http://localhost:4000/admin/orderlist", {
-          credentials: "include",
-        });
-        const orderlists = await response.json();
-        setOrderlists(orderlists);
+        const response = await fetch(
+          "http://localhost:4000/admin/orderlist",
+          {}
+        );
+        const data = await response.json();
+        setOrderlists(data);
       } catch (error) {
         console.error(error);
       }
     };
 
     orderlistData();
+
     const intervalId = setInterval(orderlistData, 5000);
 
     // 컴포넌트가 언마운트되면 setInterval을 해제
@@ -30,7 +32,6 @@ export default function Admin_AllOrderPage() {
     <>
       <div className="op_main_container">
         <div className="op_tap_container">
-          {/*  */}
           <button
             onClick={() => (window.location = "/order/allOrder")}
             className="op_tap_selectBtn"
@@ -45,7 +46,6 @@ export default function Admin_AllOrderPage() {
               />
             </p>
           </button>
-          {/*  */}
           <button
             onClick={() => (window.location = "/order/beforeOrder")}
             style={{ border: "none" }}
@@ -60,7 +60,6 @@ export default function Admin_AllOrderPage() {
               />
             </p>
           </button>
-          {/*  */}
           <button
             onClick={() => (window.location = "/order/acceptOrder")}
             style={{ border: "none" }}
@@ -75,7 +74,6 @@ export default function Admin_AllOrderPage() {
               />
             </p>
           </button>
-          {/*  */}
           <button
             onClick={() => (window.location = "/order/onDelivery")}
             style={{ border: "none" }}
@@ -90,7 +88,6 @@ export default function Admin_AllOrderPage() {
               />
             </p>
           </button>
-          {/*  */}
           <button
             onClick={() => (window.location = "/order/deliveryCompleted")}
             style={{ border: "none" }}
@@ -105,7 +102,6 @@ export default function Admin_AllOrderPage() {
               />
             </p>
           </button>
-          {/*  */}
           <button
             onClick={() => (window.location = "/order/cancelOrder")}
             style={{ border: "none" }}
@@ -122,9 +118,13 @@ export default function Admin_AllOrderPage() {
           </button>
         </div>
         <div className="op_tapContent_container">
-          {orderlists.length > 0 &&
+          {/* {orderlists.length > 0 &&
             orderlists.map((orderlist) => (
               <OrderCards {...orderlist} key={orderlist._id} />
+            ))} */}
+          {orderlists.length > 0 &&
+            orderlists.map((orderlist) => (
+              <Admin_OrderCard {...orderlist} key={orderlist._id} />
             ))}
         </div>
       </div>
