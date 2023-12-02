@@ -7,19 +7,24 @@ import {
 
 } from "@mui/material";
 import "../css/Admin_ReviewPage.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Search,
 } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 
 export default function Admin_UserPage() {
-  function UserDetialPage() {
-    window.location = "/user_detail";
-  }
 
   const [searchText, setSearchText] = useState("");
 
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/admin/Userdata")
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []);
 
   return (
     <>
@@ -48,6 +53,7 @@ export default function Admin_UserPage() {
           </div>
         </div>
 
+
         <div className="Usertable_Line1">
           <div>관리</div>
           <div>아이디</div>
@@ -55,41 +61,29 @@ export default function Admin_UserPage() {
           <div>휴대번호</div>
           <div>회원가입일</div>
         </div>
+        <ul>
+          {data.map((item) => {
+            const date = new Date(item.createdAt);
+            const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1
+              }-${date.getDate()}`;
 
-        {/* context */}
-        <div className="U_list_container">
-          <div>
-            <button className="U_detail_btn font_01" onClick={UserDetialPage}>
-              상세
-            </button>
-          </div>
-          <div>test01</div>
-          <div>장씨</div>
-          <div>010-1234-5678</div>
-          <div>2034-09-19</div>
-        </div>
-        <div className="U_list_container">
-          <div>
-            <button className="U_detail_btn font_01" onClick={UserDetialPage}>
-              상세
-            </button>
-          </div>
-          <div>test01</div>
-          <div>장씨</div>
-          <div>010-1234-5678</div>
-          <div>2034-09-19</div>
-        </div>
-        <div className="U_list_container">
-          <div>
-            <button className="U_detail_btn font_01" onClick={UserDetialPage}>
-              상세
-            </button>
-          </div>
-          <div>test01</div>
-          <div>장씨</div>
-          <div>010-1234-5678</div>
-          <div>2034-09-19</div>
-        </div>
+            return (
+              <li key={item._id}>
+                <div className="U_list_container">
+                  <div>
+                    <button className="U_detail_btn font_01">
+                      <Link to={`/user_detail/${item._id}`}>상세</Link>
+                    </button>
+                  </div>
+                  <div>{item.username}</div>
+                  <div>{item.name}</div>
+                  <div>{item.tel}</div>
+                  <div>{formattedDate}</div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </main>
     </>
   );

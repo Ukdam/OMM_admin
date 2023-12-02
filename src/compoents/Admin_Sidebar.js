@@ -76,9 +76,11 @@ export default function Admin_Sidebar() {
             className={
               location.pathname === "/product"
                 ? "active"
-                : "" || location.pathname === "/product_add"
+                : location.pathname === "/product_add"
                   ? "active"
-                  : ""
+                  : location.pathname.startsWith("/product_addUpdate/")
+                    ? "active"
+                    : ""
             }
           >
             <p>
@@ -94,7 +96,7 @@ export default function Admin_Sidebar() {
             className={
               location.pathname === "/user"
                 ? "active"
-                : "" || location.pathname === "/user_detail"
+                : "" || location.pathname.startsWith("/user_detail/")
                   ? "active"
                   : ""
             }
