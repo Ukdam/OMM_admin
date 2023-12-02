@@ -8,17 +8,15 @@ export default function Admin_ProductPage() {
     window.location = "/product_add";
   }
 
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/admin/Productdata')
-      .then(response => response.json())
-      .then(data => setData(data));
+    fetch("http://localhost:4000/admin/Productdata")
+      .then((response) => response.json())
+      .then((data) => setData(data));
   }, []);
 
   console.log(data);
-
 
   return (
     <>
@@ -51,19 +49,23 @@ export default function Admin_ProductPage() {
         </div>
         <div className="P_list_container">
           <ul>
-            {data.map(item => (
+            {data.map((item) => (
               <li key={item._id} className="Listli">
-                <button className="P_list_btn font_01">
-                  <Link to={`/product_addUpdate/${item._id}`}>수정</Link>
-                </button>
+                <span>
+                  <button className="P_list_btn font_01">
+                    <Link to={`/product_addUpdate/${item._id}`}>수정</Link>
+                  </button>
+                </span>
                 <span>{item.category}</span>
                 <span>
-                  <img className="P_list_Img" src="/img/sangchu.png" alt="그림"></img>
+                  <img
+                    className="P_list_Img"
+                    src="/img/sangchu.png"
+                    alt="그림"
+                  ></img>
                   {item.ProductName}
                 </span>
-                <span>
-                  {item.isChecked ? 'O' : 'X'}
-                </span>
+                <span>{item.isChecked ? "O" : "X"}</span>
                 <span>{item.Price}</span>
               </li>
             ))}
