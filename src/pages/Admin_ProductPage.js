@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/Admin_ProductPage.css";
+import Pagination from "react-js-pagination";
 
 export default function Admin_ProductPage() {
   function LinkAddPage() {
@@ -16,7 +17,17 @@ export default function Admin_ProductPage() {
       .then((data) => setData(data));
   }, []);
 
-  console.log(data);
+  const handlePageChange = (pageNumber) => {
+    setActivePage(pageNumber);
+  };
+
+  const [activePage, setActivePage] = useState(1);
+  const itemsCountPerPage = 10;
+
+  const indexOfLastItem = activePage * itemsCountPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsCountPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
 
   return (
     <>
@@ -49,7 +60,7 @@ export default function Admin_ProductPage() {
         </div>
         <div className="P_list_container">
           <ul>
-            {data.map((item) => (
+            {currentItems.map(item => (
               <li key={item._id} className="Listli">
                 <span>
                   <button className="P_list_btn font_01">
@@ -58,17 +69,20 @@ export default function Admin_ProductPage() {
                 </span>
                 <span>{item.category}</span>
                 <span>
-                  <img
-                    className="P_list_Img"
-                    src="/img/sangchu.png"
-                    alt="그림"
-                  ></img>
+                  <img className="P_list_Img" src={item.ImageUrl} alt="그림"></img>
                   {item.ProductName}
                 </span>
                 <span>{item.isChecked ? "O" : "X"}</span>
                 <span>{item.Price}</span>
               </li>
             ))}
+            <Pagination
+              activePage={activePage}
+              itemsCountPerPage={itemsCountPerPage}
+              totalItemsCount={data.length}
+              pageRangeDisplayed={5}
+              onChange={handlePageChange}
+            />
           </ul>
         </div>
       </main>

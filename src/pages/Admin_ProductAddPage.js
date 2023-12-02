@@ -7,6 +7,7 @@ export default function Admin_ProductAddPage() {
     const [Price, setPrice] = useState("");
     let fileInput = useRef();
     const [redirect, setRedirect] = useState(false);
+    const [count] = useState(0);
 
     // 선택한 카테고리를 저장하는 상태
     const [category, setCategory] = useState("");
@@ -43,6 +44,7 @@ export default function Admin_ProductAddPage() {
         formData.append("category", category);
         formData.append("isChecked", isChecked);
         formData.append("price", Price);
+        formData.append("count", count)
 
         const response = await fetch("http://localhost:4000/admin/upload", {
             method: 'POST',

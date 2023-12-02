@@ -52,7 +52,18 @@ export default function Admin_ProductAddUpdate() {
     const [selectedImage, setSelectedImage] = useState("");
     const imageUploader = useRef(null);
 
+    //삭제 기능
+    const handleDelete = async () => {
+        const response = await fetch(`http://localhost:4000/admin/Productdata/${id}`, {
+            method: 'DELETE',
+        });
 
+        if (response.status === 200) {
+            setRedirect(true);
+        } else {
+            alert("삭제 실패");
+        }
+    };
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
@@ -94,7 +105,7 @@ export default function Admin_ProductAddUpdate() {
                         <Link to={"/product"}>
                             <button className="font_01">목록보기</button>
                         </Link>
-                        <button className="font_01">삭제</button>
+                        <button className="font_01" onClick={(event) => { event.preventDefault(); handleDelete(); }}>삭제</button>
                         <button
                             className="font_01"
                             onClick={(event) => { event.preventDefault(); onFileUpload(); }}
