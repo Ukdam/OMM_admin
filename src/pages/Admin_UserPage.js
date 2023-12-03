@@ -20,11 +20,27 @@ export default function Admin_UserPage() {
 
   const [data, setData] = useState([]);
 
+  const [filteredData, setFilteredData] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:4000/admin/Userdata")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
+
+  useEffect(() => {
+    if (searchText === "") {
+      setFilteredData(data);
+    } else {
+      const filteredResults = data.filter((item) =>
+        item.username.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.name.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.tel.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.createdAt.includes(searchText)
+      );
+      setFilteredData(filteredResults);
+    }
+  }, [searchText, data]);
 
   return (
     <>
@@ -62,7 +78,7 @@ export default function Admin_UserPage() {
           <div>회원가입일</div>
         </div>
         <ul>
-          {data.map((item) => {
+          {filteredData.map((item) => {
             const date = new Date(item.createdAt);
             const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1
               }-${date.getDate()}`;
