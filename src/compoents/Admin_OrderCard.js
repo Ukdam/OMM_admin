@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import "../css/Admin_OrderCard.css";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, MenuItem, Select } from "@mui/material";
+// import {
+//   Modal,
+//   ModalOverlay,
+//   ModalContent,
+//   ModalHeader,
+//   ModalCloseButton,
+//   useDisclosure,
+// } from "@chakra-ui/react";
 
 export default function Admin_OrderCard({
   _id,
@@ -42,12 +43,32 @@ export default function Admin_OrderCard({
     setCancelCheck(true);
   };
 
-  const { isOpen: isOpen, onOpen: onOpen, onClose: onClose } = useDisclosure();
-  const {
-    isOpen: isOpen2,
-    onOpen: onOpen2,
-    onClose: onClose2,
-  } = useDisclosure();
+  // const { isOpen: isOpen, onOpen: onOpen, onClose: onClose } = useDisclosure();
+  const [isOpen, setIsOpen] = useState(false);
+
+const onOpen = () => {
+  setIsOpen(true);
+};
+
+const onClose = () => {
+  setIsOpen(false);
+};
+
+const [isOpen2, setIsOpen2] = useState(false);
+
+const onOpen2 = () => {
+  setIsOpen2(true);
+};
+
+const onClose2 = () => {
+  setIsOpen2(false);
+};
+
+  // const {
+  //   isOpen: isOpen2,
+  //   onOpen: onOpen2,
+  //   onClose: onClose2,
+  // } = useDisclosure();
   const [n_etavalue, setN_etavalue] = useState("");
   const [n_contextvalue, setN_contextvalue] = useState("");
 
@@ -57,44 +78,48 @@ export default function Admin_OrderCard({
     //notifyETAToSave push
     const notifyETAToSave = [];
     const notifySTATEToSave = [];
-    if (stateIndex == 0 && p_kind == "배달") {
+    if (stateIndex === 0 && p_kind === "배달") {
       notifyETAToSave.push(p_kind);
       notifyETAToSave.push(" 예정 시간은 ");
       notifyETAToSave.push(n_etavalue);
       notifyETAToSave.push(" 입니다.");
       notifySTATEToSave.push(nowState[stateIndex + 1]);
     }
-    if (stateIndex == 0 && p_kind == "포장") {
+    if (stateIndex === 0 && p_kind === "포장") {
       notifyETAToSave.push(p_kind);
       notifyETAToSave.push(" 예정 시간은 ");
       notifyETAToSave.push(n_etavalue);
       notifyETAToSave.push(" 입니다.");
       notifySTATEToSave.push(nowStatep[stateIndex + 1]);
     }
-    if (stateIndex == 1 && p_kind == "배달") {
+    if (stateIndex === 1 && p_kind === "배달") {
       notifyETAToSave.push(" 배달이 시작되었습니다. ");
       notifySTATEToSave.push(nowState[stateIndex + 1]);
     }
-    if (stateIndex == 2 && p_kind == "배달") {
+    if (stateIndex === 2 && p_kind === "배달") {
       notifyETAToSave.push(" 배달이 도착하였습니다. ");
       notifySTATEToSave.push(nowState[stateIndex + 1]);
     }
-    if (stateIndex == 1 && p_kind == "포장") {
+    if (stateIndex === 1 && p_kind === "포장") {
       notifyETAToSave.push(" 포장이 완료되었습니다. ");
       notifySTATEToSave.push(nowStatep[stateIndex + 1]);
     }
-    if (stateIndex == 2 && p_kind == "포장") {
+    if (stateIndex === 2 && p_kind === "포장") {
       notifyETAToSave.push(" 맛있게 드십시오. ");
       notifySTATEToSave.push(nowStatep[stateIndex + 1]);
     }
     const n_eta = notifyETAToSave.join("");
 
     const n_state = notifySTATEToSave.join("");
+    const n_userId = p_userId;
+    const n_store = p_store;
     const response = await fetch("http://localhost:4000/admin/ordernotify", {
       method: "POST",
       body: JSON.stringify({
         n_state,
         n_eta,
+        n_store,
+        n_userId,
       }),
       headers: { "Content-Type": "application/json" },
     });
@@ -118,11 +143,15 @@ export default function Admin_OrderCard({
     }
     const n_eta = notifyETAToSave.join("");
     const n_state = "주문 취소";
+    const n_userId = p_userId;
+    const n_store = p_store;
     const response = await fetch("http://localhost:4000/admin/ordernotify", {
       method: "POST",
       body: JSON.stringify({
         n_state,
         n_eta,
+        n_store,
+        n_userId,
       }),
       headers: { "Content-Type": "application/json" },
     });
@@ -164,6 +193,7 @@ export default function Admin_OrderCard({
       console.error("문서 삭제 오류:", error);
     }
   };
+
 
   return (
     <>
@@ -305,15 +335,95 @@ export default function Admin_OrderCard({
         </article>
       )}
 
-      {/* 모달 */}
-      <Modal
+      {/* 
+        모달 
+      */}
+
+<Dialog
+  open={isOpen}
+  onClose={onClose}
+  maxWidth="sm"
+  fullWidth={true}
+>
+  <DialogTitle>
+    <p className="font_01">주문 접수</p>
+  </DialogTitle>
+  <DialogContent>
+    <form onSubmit={sendNotify}>
+      <div className="notifym_container">
+        <div className="notifym_eta_container">
+          <p className="font_01" style={{marginBottom:20}}>{p_kind} 예정 시간</p>
+          <FormControl fullWidth>
+            <Select
+              value={n_etavalue}
+              onChange={(e) => setN_etavalue(e.target.value)}
+            >
+              <MenuItem value="10 분">10 분</MenuItem>
+              <MenuItem value="20 분">20 분</MenuItem>
+              <MenuItem value="30 분">30 분</MenuItem>
+              <MenuItem value="40 분">40 분</MenuItem>
+              <MenuItem value="50 분">50 분</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+      </div>
+      <DialogActions>
+        <Button onClick={sendNotify} color="primary" type="submit">
+          확인
+        </Button>
+        <Button onClick={onClose} color="primary" type="button">
+          취소
+        </Button>
+      </DialogActions>
+    </form>
+  </DialogContent>
+</Dialog>
+
+<Dialog
+  open={isOpen2}
+  onClose={onClose2}
+  maxWidth="sm"
+  fullWidth={true}
+>
+  <DialogTitle>
+  <p className="font_01">주문 취소</p>
+  </DialogTitle>
+  <DialogContent>
+    <form onSubmit={sendNotifyCancel}>
+      <div className="notifym_container">
+        <div className="notifym_eta_container">
+          <p className="font_01" style={{marginBottom:20}}>취소 사유</p>
+          <FormControl fullWidth>
+            <Select
+              value={n_etavalue}
+              onChange={(e) => setN_etavalue(e.target.value)}
+            >
+              <MenuItem value="재료 소진">재료 소진</MenuItem>
+              <MenuItem value="주문 밀림">주문 밀림</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+      </div>
+      <DialogActions>
+        <Button type="submit" color="primary">
+          확인
+        </Button>
+        <Button onClick={onClose2} color="primary" type="button">
+          취소
+        </Button>
+      </DialogActions>
+    </form>
+  </DialogContent>
+</Dialog>
+
+      {/* <Modal
         closeOnOverlayClick={false}
         isOpen={isOpen}
         onClose={onClose}
         size={"sm"}
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent maxWidth={'500px'} width={'100%'}>
           <ModalHeader>
             <p className="font_01 modal_title">주문 접수</p>
           </ModalHeader>
@@ -391,7 +501,7 @@ export default function Admin_OrderCard({
             </div>
           </form>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </>
   );
 }
