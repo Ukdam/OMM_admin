@@ -129,7 +129,7 @@ export default function Admin_ProductAddUpdate() {
                             </div>
                             <hr />
                             <div id="imageContainer" style={{ width: "85%", height: 330, zIndex: 1 }}>
-                                {selectedImage && <img src={selectedImage} alt="selected" style={{ width: "100%", height: "100%" }} />}
+                                {selectedImage && <img src={`http://localhost:4000/${selectedImage}`} alt="selected" style={{ width: "100%", height: "100%" }} />}
                             </div>
                         </div>
                         <div className="Product_Info">

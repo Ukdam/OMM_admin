@@ -69,7 +69,7 @@ export default function Admin_ProductPage() {
                 </span>
                 <span>{item.category}</span>
                 <span>
-                  <img className="P_list_Img" src={item.ImageUrl} alt="그림"></img>
+                  <img className="P_list_Img" src={`http://localhost:4000/${item.ImageUrl}`} alt="그림"></img>
                   {item.ProductName}
                 </span>
                 <span>{item.isChecked ? "O" : "X"}</span>
