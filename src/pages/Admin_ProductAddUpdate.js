@@ -9,6 +9,7 @@ export default function Admin_ProductAddUpdate() {
     const [Price, setPrice] = useState("");
     let fileInput = useRef();
     const [redirect, setRedirect] = useState(false);
+    const [count] = useState(0);
 
     //수정 url에서 아이디 가져오기
     const { id } = useParams();
@@ -72,25 +73,27 @@ export default function Admin_ProductAddUpdate() {
         fileInput.current = file; // 파일 정보를 fileInput에 저장
     };
 
-    const onFileUpload = async () => {
+    //db 업데이트
+    const onUpdateProduct = async () => {
         const formData = new FormData();
-        const file = fileInput.current; // 파일 이름 변경하지 않음
+        const file = fileInput.current;
 
         formData.append("file", file);
         formData.append("productName", ProductName);
         formData.append("category", category);
         formData.append("isChecked", isChecked);
         formData.append("price", Price);
+        formData.append("count", count)
 
-        const response = await fetch("http://localhost:4000/admin/upload", {
-            method: 'POST',
+        const response = await fetch(`http://localhost:4000/admin/Productdata/${id}`, {
+            method: 'PUT',
             body: formData
         });
 
         if (response.status === 200) {
             setRedirect(true);
         } else {
-            alert("정보 보내기 실패");
+            alert("정보 업데이트 실패");
         }
     };
     if (redirect) return <Navigate to={"/product"} />;
@@ -108,7 +111,7 @@ export default function Admin_ProductAddUpdate() {
                         <button className="font_01" onClick={(event) => { event.preventDefault(); handleDelete(); }}>삭제</button>
                         <button
                             className="font_01"
-                            onClick={(event) => { event.preventDefault(); onFileUpload(); }}
+                            onClick={(event) => { event.preventDefault(); onUpdateProduct(); }}
                         >저장</button>
                     </div>
                     <div className="ProductAdd_Container">
