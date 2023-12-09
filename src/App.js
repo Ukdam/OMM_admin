@@ -19,38 +19,44 @@ import Admin_DeliveryCompletedPage from "./pages/OrderPages/Admin_DeliveryComple
 import Admin_AcceptOrderPage from "./pages/OrderPages/Admin_AcceptOrderPage";
 import Admin_CancelOrderPage from "./pages/OrderPages/Admin_CancelOrderPage";
 import Admin_ProductAddUpdate from "./pages/Admin_ProductAddUpdate";
+import SocketProvider from "./contexts/SocketContext";
+import OrderCountProvider from "./contexts/OrderCountContext";
 
 function App() {
   return (
     <>
+    <SocketProvider>
       <UserContextProvider>
         <MenuContextProvider>
-          <Routes>
-            <Route path="/" element={<Admin_Layout />}>
-              <Route index element={<Admin_IndexPage />} />
-              <Route path="login" element={<Admin_LoginPage />} />
-              <Route path="order" element={<Admin_OrderPage />}>
-                <Route path="allOrder" element={<Admin_AllOrderPage />} />
-                <Route path="beforeOrder" element={<Admin_BeforeOrderPage />} />
-                <Route path="acceptOrder" element={<Admin_AcceptOrderPage />} />
-                <Route path="onDelivery" element={<Admin_OnDeliveryPage />} />
-                <Route
-                  path="deliveryCompleted"
-                  element={<Admin_DeliveryCompletedPage />}
-                />
-                <Route path="cancelOrder" element={<Admin_CancelOrderPage />} />
-              </Route>
+          <OrderCountProvider>
+            <Routes>
+              <Route path="/" element={<Admin_Layout />}>
+                <Route index element={<Admin_IndexPage />} />
+                <Route path="login" element={<Admin_LoginPage />} />
+                <Route path="order" element={<Admin_OrderPage />}>
+                  <Route path="allOrder" element={<Admin_AllOrderPage />} />
+                  <Route path="beforeOrder" element={<Admin_BeforeOrderPage />} />
+                  <Route path="acceptOrder" element={<Admin_AcceptOrderPage />} />
+                  <Route path="onDelivery" element={<Admin_OnDeliveryPage />} />
+                  <Route
+                    path="deliveryCompleted"
+                    element={<Admin_DeliveryCompletedPage />}
+                  />
+                  <Route path="cancelOrder" element={<Admin_CancelOrderPage />} />
+                </Route>
 
-              <Route path="user" element={<Admin_UserPage />} />
-              <Route path="user_detail/:id" element={<Admin_UserDetailPage />} />
-              <Route path="review" element={<Admin_ReviewPage />} />
-              <Route path="product" element={<Admin_ProductPage />} />
-              <Route path="product_add" element={<Admin_ProductAddPage />} />
-              <Route path="product_addUpdate/:id" element={<Admin_ProductAddUpdate />} />
-            </Route>
-          </Routes>
+                <Route path="user" element={<Admin_UserPage />} />
+                <Route path="user_detail/:id" element={<Admin_UserDetailPage />} />
+                <Route path="review" element={<Admin_ReviewPage />} />
+                <Route path="product" element={<Admin_ProductPage />} />
+                <Route path="product_add" element={<Admin_ProductAddPage />} />
+                <Route path="product_addUpdate/:id" element={<Admin_ProductAddUpdate />} />
+              </Route>
+            </Routes>
+          </OrderCountProvider>
         </MenuContextProvider>
       </UserContextProvider>
+      </SocketProvider>
     </>
   );
 }
