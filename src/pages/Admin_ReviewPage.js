@@ -93,7 +93,7 @@ export default function Admin_ReviewPage() {
     } else {
       const filteredResults = data.filter((item) =>
         item.r_review.toLowerCase().includes(searchText.toLowerCase()) ||
-        item.r_rating.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.r_rating.toString().toLowerCase().includes(searchText.toLowerCase()) ||
         item.r_username.toLowerCase().includes(searchText.toLowerCase()) ||
         item.createdAt.includes(searchText)
       );
