@@ -11,7 +11,7 @@ import {
   styled,
 } from "@mui/material";
 import "../css/Admin_ReviewPage.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Close,
   Search,
@@ -22,13 +22,23 @@ import {
 import { useRef } from "react";
 import Ingredient_DATA from "../datas/Ingredient_DATA.json";
 import { lightGreen } from "@mui/material/colors";
+import { Link } from "react-router-dom";
 
 export default function Admin_ReviewPage() {
+
   const [open, setOpen] = useState(false);
   const modalOpen = () => setOpen(true);
   const modalClose = () => setOpen(false);
-
+  const [filteredData, setFilteredData] = useState([]);
   const imgcontainerRef = useRef();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/admin/Reviewdata")
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []);
+
   let isDown = false;
   let startX;
   let scrollLeft;
@@ -77,6 +87,20 @@ export default function Admin_ReviewPage() {
   // 검색창
   const [searchText, setSearchText] = useState("");
 
+  useEffect(() => {
+    if (searchText === "") {
+      setFilteredData(data);
+    } else {
+      const filteredResults = data.filter((item) =>
+        item.r_review.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.r_rating.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.r_username.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.createdAt.includes(searchText)
+      );
+      setFilteredData(filteredResults);
+    }
+  }, [searchText, data]);
+
   return (
     <>
       <main className="main_outlet font_01">
@@ -104,6 +128,7 @@ export default function Admin_ReviewPage() {
               />
             </div>
           </div>
+
           <div className="rp_main">
             <div className="rp_table_header">
               <div>번호</div>
@@ -113,8 +138,28 @@ export default function Admin_ReviewPage() {
               <div>작성일</div>
             </div>
 
+            
+
             {/*  */}
             <div className="rp_table_list">
+            <ul>
+              {filteredData.map((item) => {
+                const date = new Date(item.createdAt);
+                const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1
+                  }-${date.getDate()}`;
+
+                return (
+                  <li key={item._id}>
+                    <div className="rp_table_list">
+                      <div>{item.r_review}</div>
+                      <div>{item.r_rating}</div>
+                      <div>{item.r_username}</div>
+                      <div>{formattedDate}</div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
               <div>1</div>
               <div>
                 <p
