@@ -316,7 +316,7 @@
 
 .__bp_img {
   width: 100px;
-  background-color: #2e2e2e13;
+  /* background-color: #2e2e2e13; */
   line-height: 100px;
   color: #b8b8b8;
   border-radius: 20px;

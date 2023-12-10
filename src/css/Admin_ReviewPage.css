@@ -192,8 +192,10 @@
   margin-top: 25px;
   border-radius: 10px;
   background-color: white;
+  float: left;
   /* object-fit: cover; */
 }
+
 
 /* 모달 기본 정보 영역 */
 .rp_modal_basicInfoContainer {

@@ -3,19 +3,39 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/Admin_ProductPage.css";
 import Pagination from "react-js-pagination";
+import { useContext } from "react";
+import { SocketContext } from "../contexts/SocketContext";
+import { ProductCountContext } from "../contexts/ProductCountContext";
 
 export default function Admin_ProductPage() {
+  const socket = useContext(SocketContext);
+  const { productCount, updateProductCounts } = useContext(ProductCountContext);
+
   function LinkAddPage() {
     window.location = "/product_add";
   }
 
   const [data, setData] = useState([]);
 
-  useEffect(() => {
+  const fetchProductData = () => {
     fetch("http://localhost:4000/admin/Productdata")
       .then((response) => response.json())
       .then((data) => setData(data));
-  }, []);
+    updateProductCounts();
+  };
+
+  useEffect(() => {
+    fetchProductData();
+    updateProductCounts();
+
+    if (socket) {
+      socket.on('productDataChanged', fetchProductData);
+
+    return () => {
+      socket.off('productDataChanged', fetchProductData);
+    };
+  }
+  }, [socket]);
 
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);

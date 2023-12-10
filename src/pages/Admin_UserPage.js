@@ -12,21 +12,35 @@ import {
   Search,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { SocketContext } from "../contexts/SocketContext";
+import { useContext } from "react";
 
 
 export default function Admin_UserPage() {
-
+  const socket = useContext(SocketContext);
   const [searchText, setSearchText] = useState("");
 
   const [data, setData] = useState([]);
 
   const [filteredData, setFilteredData] = useState([]);
 
-  useEffect(() => {
+  const fetchUserData = () => {
     fetch("http://localhost:4000/admin/Userdata")
       .then((response) => response.json())
       .then((data) => setData(data));
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchUserData();
+
+    if (socket) {
+      socket.on('customerDataChanged', fetchUserData);
+
+    return () => {
+      socket.off('customerDataChanged', fetchUserData);
+    };
+  }
+  }, [socket]);
 
   useEffect(() => {
     if (searchText === "") {

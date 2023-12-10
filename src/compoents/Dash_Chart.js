@@ -9,7 +9,6 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import faker from "faker";
 
 ChartJS.register(
   CategoryScale,
@@ -30,7 +29,7 @@ export default function Dash_Chart() {
       },
       title: {
         display: true,
-        text: "OMM 주문 수",
+        text: "OMM 매출액",
       },
     },
   };
@@ -52,9 +51,8 @@ export default function Dash_Chart() {
     labels,
     datasets: [
       {
-        label: "주문 수",
-        data: labels.map(() => faker.random.number({ min: 0, max: 300 })),
-        // data: labels.map(() => faker.random.number({ min: -300, max: 300 })),
+        label: "매출액 (만원)",
+        data: [2200, 2000, 2550, 2030, 1980, 1770, 2440, 2100, 2600, 2900, 1800, 2300],
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },

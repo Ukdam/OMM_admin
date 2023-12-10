@@ -11,7 +11,7 @@ import {
   styled,
 } from "@mui/material";
 import "../css/Admin_ReviewPage.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Close,
   Search,
@@ -23,8 +23,12 @@ import { useRef } from "react";
 import Ingredient_DATA from "../datas/Ingredient_DATA.json";
 import { lightGreen } from "@mui/material/colors";
 import { Link } from "react-router-dom";
+import { SocketContext } from "../contexts/SocketContext";
+import { ReviewCountContext } from "../contexts/ReviewCountContext";
 
 export default function Admin_ReviewPage() {
+  const socket = useContext(SocketContext);
+  const { reviewCount, updateReviewCounts } = useContext(ReviewCountContext);
 
   const [open, setOpen] = useState(false);
   const modalOpen = () => setOpen(true);
@@ -33,11 +37,25 @@ export default function Admin_ReviewPage() {
   const imgcontainerRef = useRef();
   const [data, setData] = useState([]);
 
-  useEffect(() => {
+  const fetchReviewData = () => {
     fetch("http://localhost:4000/admin/Reviewdata")
       .then((response) => response.json())
       .then((data) => setData(data));
-  }, []);
+    updateReviewCounts();
+  };
+
+  useEffect(() => {
+    fetchReviewData();
+    updateReviewCounts();
+
+    if (socket) {
+      socket.on('reviewDataChanged', fetchReviewData);
+
+    return () => {
+      socket.off('reviewDataChanged', fetchReviewData);
+    };
+  }
+  }, [socket]);
 
   let isDown = false;
   let startX;
@@ -101,6 +119,24 @@ export default function Admin_ReviewPage() {
     }
   }, [searchText, data]);
 
+  // 선택된 후기의 정보를 저장할 상태
+  const [selectedItem, setSelectedItem] = useState(null);
+  const handleItemClick = (item) => {
+    setSelectedItem(item); // 선택된 아이템의 정보를 저장
+    setOpen(true); // 모달을 열기
+  };
+
+  function formatDateModal(isoDateString) {
+    if (!isoDateString) return "";
+  
+    const date = new Date(isoDateString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+  
+    return `${year}/${month}/${day}`;
+  }
+
   return (
     <>
       <main className="main_outlet font_01">
@@ -143,24 +179,29 @@ export default function Admin_ReviewPage() {
             {/*  */}
             <div>
             <ul>
-              {filteredData.map((item, index) => {
-                const date = new Date(item.createdAt);
-                const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1
-                  }-${date.getDate()}`;
+                {filteredData.map((item, index) => {
+                  if (!item) return null;
 
-                return (
-                  <li key={item._id}>
-                    <div className="rp_table_list">
-                      <div>{index + 1}</div>
-                      <div>{item.r_review}</div>
-                      <div>{item.r_rating}</div>
-                      <div>{item.r_username}</div>
-                      <div>{formattedDate}</div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+                  const date = new Date(item.createdAt);
+                  const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+
+                  return (
+                    <li key={item._id} onClick={() => handleItemClick(item)}>
+                      <div className="rp_table_list">
+                        <div>{index + 1}</div>
+                        <div>
+                          <p onClick={modalOpen} style={{cursor: "pointer",}}>
+                            {item.r_review}
+                          </p>
+                        </div>
+                        <div><Rating value={item.r_rating} precision={0.5} readOnly /></div>
+                        <div>{item.r_username}</div>
+                        <div>{formattedDate}</div>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
         </div>
@@ -182,7 +223,7 @@ export default function Admin_ReviewPage() {
         <Fade in={open}>
           <div className="rp_modal_container">
             <div className="rp_modal_title font_01">
-              <p>후기 - id</p>
+              <p>후기 - {selectedItem?._id}</p>
               <button className="rp_modal_closebtn" onClick={modalClose}>
                 <Close />
               </button>
@@ -196,26 +237,32 @@ export default function Admin_ReviewPage() {
                 onMouseMove={handleMouseMove}
                 ref={imgcontainerRef}
               >
-                <div className="rp_modal_imagebox">이미지</div>
-                <div className="rp_modal_imagebox">이미지</div>
-                <div className="rp_modal_imagebox">이미지</div>
-                <div className="rp_modal_imagebox">이미지</div>
-                <div className="rp_modal_imagebox">이미지</div>
+                <div className="rp_modal_imagebox">
+                  {selectedItem?.ImageUrl == "images/" ? <></> : <>
+                  <img src={`http://localhost:4000/${selectedItem?.ImageUrl}`} alt={selectedItem?._id} style={{width:300, height:200, objectFit:"cover", marginRight:50}}/>
+                  <img src={`http://localhost:4000/${selectedItem?.ImageUrl}`} alt={selectedItem?._id} style={{width:300, height:200, objectFit:"cover", marginRight:50}}/>
+                  <img src={`http://localhost:4000/${selectedItem?.ImageUrl}`} alt={selectedItem?._id} style={{width:300, height:200, objectFit:"cover", marginRight:50}}/>
+                  <img src={`http://localhost:4000/${selectedItem?.ImageUrl}`} alt={selectedItem?._id} style={{width:300, height:200, objectFit:"cover", marginRight:50}}/> 
+                  </>}
+                </div>
               </div>
 
               <div className="rp_modal_basicInfoContainer font_01">
-                <div>작성자 : 홍길동</div>
+                <div>작성자 : {selectedItem?.r_username}</div>
                 <div>
-                  <Rating value={3} precision={0.5} readOnly size="large" />
+                  <Rating value={selectedItem?.r_rating} precision={0.5} readOnly size="large" />
                 </div>
-                <div>작성일자 : 2023/6/9</div>
+                <div>작성일자 : {formatDateModal(selectedItem?.createdAt)}</div>
               </div>
 
               <div className="rp_modal_ingredientContainer font_01">
-                {Ingredient_DATA.map((data) => {
+                {/* r_ingredient로 재료들의 이름을 가져오고 r_good이랑 비교해서 똑같은것이 있으면 따봉 */}
+                {selectedItem?.r_ingredient.split(',').filter(ingredient => ingredient.trim() !== "").map((ingredient, index) => {
                   let icon;
+                  ingredient = ingredient.trim(); // 앞뒤 공백 제거
 
-                  if (data.good === true) {
+                  const ingredientName = ingredient.split(' ')[0]; 
+                  if (selectedItem?.r_good.split(',').some(good => good.trim().startsWith(ingredientName))) {
                     icon = (
                       <ThumbUp
                         sx={{ fontSize: 14 }}
@@ -226,10 +273,10 @@ export default function Admin_ReviewPage() {
                   }
 
                   return (
-                    <ListItem key={data.key}>
+                    <ListItem key={index}>
                       <Chip
                         icon={icon}
-                        label={data.name}
+                        label={ingredient}
                         variant="outlined"
                         style={{ backgroundColor: "white" }}
                       />
@@ -240,34 +287,10 @@ export default function Admin_ReviewPage() {
 
               <div className="rp_modal_contextContainer font_01">
                 <p className="rp_modal_contextBox">
-                  이곳은 신선한 재료와 다양한 메뉴로 유명하다는 후문을 듣고
-                  선택한 곳이었습니다. 첫 번째로 시킨 메뉴는 '아보카도
-                  샐러드'였습니다. 아보카도의 부드러움과 신선한 채소의 조합이
-                  아주 만족스러웠습니다. 특히, 집에서는 쉽게 느낄 수 없는
-                  고급스러운 드레싱의 맛이 인상적이었습니다. 다음으로 주문한
-                  '연어 샐러드'는 푸짐한 연어와 새콤한 레몬 드레싱이 완벽하게
-                  어울렸습니다. 연어는 신선하고, 적절한 양의 드레싱으로 샐러드가
-                  건조하지 않게 잘 어우러져 있었습니다. 배달 서비스 또한 매우
-                  만족스러웠습니다. 직원들이 신속하게 배달해주고, 모든 음식이
-                  안전하게 포장되어 있어서, 집에서도 신선함을 유지하며 즐길 수
-                  있었습니다. 특히, 바쁜 일상에서 식사 준비에 시간을 투자하기
-                  어려운 사람들에게는 배달 서비스가 큰 도움이 될 것 같습니다.
-                  훌륭한 맛과 서비스, 그리고 편리한 배달 서비스를 통해 다음에도
-                  꼭 다시 주문하고 싶습니다.
+                  {selectedItem?.r_review}
                 </p>
                 <p className="rp_modal_replyBox">
-                  우선 저희 음식점을 이용해주시고 소중한 리뷰 남겨주셔서
-                  감사드립니다. 고객님께서 아보카도 샐러드와 연어 샐러드를
-                  맛있게 드셨다는 후기를 읽으니 저희 팀 모두 매우 기쁘게
-                  생각하고 있습니다. 저희는 항상 신선한 재료를 사용하고,
-                  고객님들께 최고의 맛을 제공하기 위해 끊임없이 노력하고
-                  있습니다. 배달 서비스에 대한 칭찬도 감사드립니다. 특히 현재와
-                  같은 시기에는, 안전하고 신속한 배달이 중요하다는 것을 알고
-                  있기에, 이 부분에 대해 더욱 신경 쓰고 있습니다. 앞으로도
-                  건강하고 맛있는 식사를 제공하는 데에 최선을 다하겠습니다.
-                  다음에도 맛있는 샐러드와 함께 행복한 시간 보내실 수 있도록
-                  노력하겠습니다. 다시 한번 리뷰 남겨주신 덕분에 힘이 나네요.
-                  감사합니다!"
+                  {selectedItem?.r_reply}
                 </p>
 
                 {/* 답글 출력 */}
@@ -280,7 +303,25 @@ export default function Admin_ReviewPage() {
                 <div className="rp_modal_replyContainer">
                   <TextField
                     ref={replyInputRef}
-                    onKeyDown={handleEnter}
+                    onKeyDown={async (event) => {
+                      if (event.key === 'Enter') {
+                        event.preventDefault();
+                        replySend();
+                        try {
+                          await fetch(`http://localhost:4000/admin/review/${selectedItem?._id}`, {
+                            method: 'PATCH',
+                            headers: {
+                              'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ reply: newText }),
+                          });
+                          setNewText("");
+                          console.log("r_reply : " + newText);
+                        } catch (error) {
+                          console.error(error);
+                        }
+                      }
+                    }}
                     fullWidth
                     id="rp_modal_replyInput"
                     label="답글"
@@ -296,7 +337,24 @@ export default function Admin_ReviewPage() {
                           <IconButton
                             color="primary"
                             sx={{ p: "10px" }}
-                            onClick={replySend}
+                            onClick={ async () => {
+                              replySend();
+                              try {
+                                // 서버에 API 요청을 보냅니다.
+                                await fetch(`http://localhost:4000/admin/review/${selectedItem?._id}`, {
+                                  method: 'PATCH',
+                                  headers: {
+                                    'Content-Type': 'application/json'
+                                  },
+                                  body: JSON.stringify({ reply: newText }),
+                                });
+                                // 상태를 초기화합니다.
+                                setNewText("");
+                                console.log("r_reply : " + newText);
+                              } catch (error) {
+                                console.error(error);
+                              }
+                            }}
                           >
                             <Send />
                           </IconButton>

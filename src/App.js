@@ -21,6 +21,8 @@ import Admin_CancelOrderPage from "./pages/OrderPages/Admin_CancelOrderPage";
 import Admin_ProductAddUpdate from "./pages/Admin_ProductAddUpdate";
 import SocketProvider from "./contexts/SocketContext";
 import OrderCountProvider from "./contexts/OrderCountContext";
+import ProductCountProvider from "./contexts/ProductCountContext";
+import ReviewCountProvider from "./contexts/ReviewCountContext";
 
 function App() {
   return (
@@ -28,7 +30,9 @@ function App() {
     <SocketProvider>
       <UserContextProvider>
         <MenuContextProvider>
+          <ProductCountProvider>
           <OrderCountProvider>
+            <ReviewCountProvider>
             <Routes>
               <Route path="/" element={<Admin_Layout />}>
                 <Route index element={<Admin_IndexPage />} />
@@ -53,7 +57,9 @@ function App() {
                 <Route path="product_addUpdate/:id" element={<Admin_ProductAddUpdate />} />
               </Route>
             </Routes>
+            </ReviewCountProvider>
           </OrderCountProvider>
+          </ProductCountProvider>
         </MenuContextProvider>
       </UserContextProvider>
       </SocketProvider>

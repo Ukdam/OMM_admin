@@ -14,10 +14,13 @@ export default function OrderCountProvider({ children }){
     cancelCount: 0,
   });
 
+  const [orderInfo, setOrderInfo] = useState([]);
+
   const updateOrderCounts = useCallback(async () => {
     try {
       const response = await fetch("http://localhost:4000/admin/orderlist", {});
       const data = await response.json();
+      setOrderInfo(data);
       setOrderCount({
         beforeCount: data.filter(order => order.p_state == '미 접수').length,
         acceptCount: data.filter(order => order.p_state == '주문 접수').length,
@@ -32,7 +35,7 @@ export default function OrderCountProvider({ children }){
   }, []);
 
   return (
-    <OrderCountContext.Provider value={{ orderCount, updateOrderCounts }}>
+    <OrderCountContext.Provider value={{ orderCount, updateOrderCounts, orderInfo, setOrderInfo }}>
       {children}
     </OrderCountContext.Provider>
   );
