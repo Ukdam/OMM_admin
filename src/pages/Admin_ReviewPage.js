@@ -141,9 +141,9 @@ export default function Admin_ReviewPage() {
             
 
             {/*  */}
-            <div className="rp_table_list">
+            <div>
             <ul>
-              {filteredData.map((item) => {
+              {filteredData.map((item, index) => {
                 const date = new Date(item.createdAt);
                 const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1
                   }-${date.getDate()}`;
@@ -151,6 +151,7 @@ export default function Admin_ReviewPage() {
                 return (
                   <li key={item._id}>
                     <div className="rp_table_list">
+                      <div>{index + 1}</div>
                       <div>{item.r_review}</div>
                       <div>{item.r_rating}</div>
                       <div>{item.r_username}</div>
@@ -160,23 +161,6 @@ export default function Admin_ReviewPage() {
                 );
               })}
             </ul>
-              <div>1</div>
-              <div>
-                <p
-                  onClick={modalOpen}
-                  style={{
-                    cursor: "pointer",
-                  }}
-                >
-                  이곳은 신선한 재료와 다양한 메뉴로 유명하다는 후문을 듣고
-                  선택한 곳이었습니다.
-                </p>
-              </div>
-              <div>
-                <Rating value={3} precision={0.5} readOnly />
-              </div>
-              <div>홍길동</div>
-              <div>2023/6/9</div>
             </div>
           </div>
         </div>
