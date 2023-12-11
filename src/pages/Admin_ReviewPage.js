@@ -240,9 +240,6 @@ export default function Admin_ReviewPage() {
                 <div className="rp_modal_imagebox">
                   {selectedItem?.ImageUrl == "images/" ? <></> : <>
                   <img src={`http://localhost:4000/${selectedItem?.ImageUrl}`} alt={selectedItem?._id} style={{width:300, height:200, objectFit:"cover", marginRight:50}}/>
-                  <img src={`http://localhost:4000/${selectedItem?.ImageUrl}`} alt={selectedItem?._id} style={{width:300, height:200, objectFit:"cover", marginRight:50}}/>
-                  <img src={`http://localhost:4000/${selectedItem?.ImageUrl}`} alt={selectedItem?._id} style={{width:300, height:200, objectFit:"cover", marginRight:50}}/>
-                  <img src={`http://localhost:4000/${selectedItem?.ImageUrl}`} alt={selectedItem?._id} style={{width:300, height:200, objectFit:"cover", marginRight:50}}/> 
                   </>}
                 </div>
               </div>
