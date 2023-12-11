@@ -28,9 +28,9 @@ export default function Admin_IndexPage() {
   const p_allCount = productCount?.p_allCount;
   const p_soldoutCount = productCount?.p_soldoutCount;
   // productInfo 배열을 랜덤으로 섞기
-  // const randomProductInfo = [...productInfo].sort(() => Math.random() - 0.5);
+  const randomProductInfo = [...productInfo].sort(() => Math.random() - 0.5);
   // productInfo 배열을 count 내림차순으로 섞기
-  const sortedProductInfo = [...productInfo].sort((a, b) => b.count - a.count);
+  // const sortedProductInfo = [...productInfo].sort((a, b) => b.count - a.count);
 
   const { reviewCount, updateReviewCounts } = useContext(ReviewCountContext);
   const r_allCount = reviewCount?.r_allCount;
@@ -65,6 +65,7 @@ export default function Admin_IndexPage() {
       socket.off('reviewDataChanged', handleListUpdate);
     };
   }, [socket, updateOrderCounts, updateProductCounts, updateReviewCounts]);
+
 
   return (
     <>
@@ -188,7 +189,7 @@ export default function Admin_IndexPage() {
             <div className="dashboard dash_bestproductbox">
               <p className="dash_boxtitle">인기 재료</p>
               <div className="__dash_bestproductbox">
-              {sortedProductInfo.slice(0, 4).map((product, index) => (
+              {randomProductInfo.slice(0, 4).map((product, index) => (
                 <div key={index} className="__bp_bestproduct">
                   <div className="__bp_img">
                     <img src={`http://localhost:4000/${product.ImageUrl}`} alt={product.ProductName} style={{width:90, height:90, objectFit:"cover"}}/>
