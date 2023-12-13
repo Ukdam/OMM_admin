@@ -165,7 +165,7 @@ export default function Admin_IndexPage() {
                 </div>
               </div>
               <div className="dashboard dash_numofpaymentbox">
-                <p className="dash_boxtitle">결제완료 건수</p>
+                <p className="dash_boxtitle">매출액</p>
                 <div className="__dash_numofpaymentbox">
                   <div className="__nop_chartbox">
                     <Dash_Chart />
