@@ -66,9 +66,13 @@ export default function Admin_IndexPage() {
     };
   }, [socket, updateOrderCounts, updateProductCounts, updateReviewCounts]);
 
+  const { setUserInfo, userInfo } = useContext(UserContext);
+
+  const username = userInfo?.username;
 
   return (
     <>
+    {username ? 
       <main className="main_outlet font_01">
         <div className="index_titlecontainer">대시보드</div>
         <div className="index_maincontainer">
@@ -205,6 +209,8 @@ export default function Admin_IndexPage() {
           </div>
         </div>
       </main>
+      :
+      <Navigate to={"/login"} />     }
     </>
   );
 }

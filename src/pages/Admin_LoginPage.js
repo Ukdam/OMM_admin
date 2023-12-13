@@ -7,6 +7,33 @@ import { UserContext } from "../contexts/Admin_UserContext";
 export default function Admin_LoginPage() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
+
+  const { setUserInfo, userInfo } = useContext(UserContext);
+
+  async function login(e) {
+    e.preventDefault();
+
+    const response = await fetch("http://localhost:4000/admin/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      response.json().then((userInfo) => {
+        setUserInfo(userInfo);
+        setRedirect(true);
+      });
+    } else {
+      alert("로그인 실패");
+    }
+  }
+
+  if (redirect) {
+    return <Navigate to={"/"} />;
+
+  }
 
   return (
     <>
@@ -36,7 +63,7 @@ export default function Admin_LoginPage() {
             </div>
           </div>
           <div className="login_btncontainer">
-            <button>로그인</button>
+            <button onClick={login}>로그인</button>
           </div>
         </form>
       </main>

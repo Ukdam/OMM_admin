@@ -5,28 +5,27 @@ import { UserContext } from "../contexts/Admin_UserContext";
 import { Link, Navigate, useLocation } from "react-router-dom";
 
 export default function Admin_Sidebar() {
-  // const { setUserInfo, userInfo } = useContext(UserContext);
+  const { setUserInfo, userInfo } = useContext(UserContext);
 
-  // useEffect(() => {
-  //   fetch("http://localhost:4000/admin/profile", {
-  //     credentials: "include",
-  //   }).then((res) => {
-  //     res.json().then((userInfo) => {
-  //       setUserInfo(userInfo);
-  //     });
-  //   });
-  // }, []);
+  function logout() {
+    fetch("http://localhost:4000/admin/logout", {
+      method: "POST",
+    });
+    setUserInfo(null);
+  }
 
-  // function logout() {
-  //   fetch("http://localhost:4000/admin/logout", {
-  //     credentials: "include",
-  //     method: "POST",
-  //   });
-  //   setUserInfo(null);
-  // }
+  useEffect(() => {
+    fetch("http://localhost:4000/admin/profile", {
+    }).then((res) => {
+      res.json().then((userInfo) => {
+        setUserInfo(userInfo);
+      });
+    });
+  }, []);
 
-  // const username = userInfo?.username;
-
+  const username = userInfo?.username;
+  const store = userInfo?.store;
+  
   const location = useLocation();
 
   return (
@@ -125,11 +124,17 @@ export default function Admin_Sidebar() {
           </Link>
         </div>
         <div className="sidebar_remaincontainer">
-          <div>
+          {username ? <div>
             {/* 로그인시 이름 */}
-            <p>이름</p>
-            <button className="font_01">로그아웃</button>
+            <p>{store}</p>
+            <button className="font_01" onClick={logout}>로그아웃</button>
           </div>
+          :
+          <div>
+          {/* 로그인시 이름 */}
+          <p></p>
+          </div>
+          }
         </div>
       </div>
     </>
